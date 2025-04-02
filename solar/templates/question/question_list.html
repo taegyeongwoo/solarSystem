@@ -1,0 +1,258 @@
+{% extends 'base.html' %} {% block content %}
+
+<head>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/question.css') }}"
+    />
+</head>
+
+<!-- 자주 묻는 질문 -->
+<div class="faq-section">
+    <div class="container">
+        <h2 class="text-center mb-5">자주 묻는 질문</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" style="margin-bottom: 0">
+                    <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq1"
+                    >
+                        거래 수수료는 얼마인가요?
+                    </button>
+                </h2>
+                <div
+                    id="faq1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#faqAccordion"
+                >
+                    <div class="accordion-body">
+                        거래 금액의 1~3% 수준이며, 구체적인 수수료율은 거래
+                        규모와 조건에 따라 협의됩니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" style="margin-bottom: 0">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq2"
+                    >
+                        매물 등록부터 거래 완료까지 얼마나 걸리나요?
+                    </button>
+                </h2>
+                <div
+                    id="faq2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                >
+                    <div class="accordion-body">
+                        평균적으로 1~3개월 정도 소요되며, 서류 준비 상태와
+                        양측의 협의 속도에 따라 달라질 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" style="margin-bottom: 0">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq3"
+                    >
+                        실사 비용은 누가 부담하나요?
+                    </button>
+                </h2>
+                <div
+                    id="faq3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion"
+                >
+                    <div class="accordion-body">
+                        기본적인 실사 비용은 판매자가 부담하며, 추가적인 정밀
+                        실사가 필요한 경우 구매자와 협의하여 결정합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col-6">
+            <a href="{{ url_for('question.create') }}" class="btn btn-primary"
+                >질문 등록하기</a
+            >
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="search_kw"
+                    class="form-control"
+                    value="{{ kw or '' }}"
+                />
+                <div class="input-group-append">
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        id="btn_search"
+                    >
+                        찾기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr class="text-center thead-dark">
+                <th>번호</th>
+                <th>추천</th>
+                <th style="width: 50%">제목</th>
+                <th>글쓴이</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if question_list %} {% for question in question_list.items %}
+            <tr class="text-center">
+                <td>
+                    {{ question_list.total - ((question_list.page - 1) *
+                    question_list.per_page) - loop.index0 }}
+                </td>
+                <td>
+                    {% if question.voter|length > 0 %}
+                    <span class="badge badge-warning px-2 py-1"
+                        >{{ question.voter|length }}</span
+                    >
+                    {% endif %}
+                </td>
+                <td class="text-left">
+                    <a
+                        href="{{ url_for('question.detail', question_id=question.id) }}"
+                        >{{ question.subject }}</a
+                    >
+                    {% if question.answer_set|length > 0 %}
+                    <span class="text-danger small ml-2"
+                        >{{ question.answer_set|length }}</span
+                    >
+                    {% endif %}
+                </td>
+                <td>{{ question.user.username }}</td>
+                <td>{{ question.create_date|datetime }}</td>
+            </tr>
+            {% endfor%} {% else %}
+            <tr>
+                <td colspan="3">질문이 없습니다.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- 페이징 처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전 페이지 -->
+        {% if question_list.has_prev %}
+        <li class="page-item">
+            <a
+                href="?page={{ question_list.prev_num }}"
+                class="page-link"
+                href="javascript:void(0)"
+                >이전</a
+            >
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a
+                href="javascript:void(0)"
+                class="page-link"
+                tabindex="-1"
+                aria-disabled="true"
+                >이전</a
+            >
+        </li>
+        {% endif %} {% for page_num in question_list.iter_pages() %} {% if
+        page_num %} {% if page_num != question_list.page %}
+        <li class="page-item">
+            <a
+                href="?page={{ page_num }}"
+                class="page-link"
+                href="javascript:void(0)"
+                >{{ page_num }}</a
+            >
+        </li>
+        {% else %}
+        <li class="page-item active" aria-current="page">
+            <a href="#" class="page-link">{{ page_num }}</a>
+        </li>
+        {% endif %} {% else %}
+        <li class="disabled">
+            <a href="javascript:void(0)" class="page-link">...</a>
+        </li>
+        {% endif %} {% endfor %}
+        <!-- 다음 페이지 -->
+        {% if question_list.has_next %}
+        <li class="page-item">
+            <a
+                href="?page={{ question_list.next_num }}"
+                class="page-link"
+                href="javascript:void(0)"
+                >다음</a
+            >
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a
+                href="javascript:void(0)"
+                class="page-link"
+                tabindex="-1"
+                aria-disabled="true"
+                >다음</a
+            >
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징 처리 끝 -->
+</div>
+
+<!-- 문의하기 섹션 -->
+<div class="contact-section">
+    <div class="container">
+        <h2 class="mb-4">더 자세한 안내가 필요하신가요?</h2>
+        <p class="mb-4">전문 상담사가 상세한 안내를 도와드리겠습니다.</p>
+        <a href="#" class="btn btn-custom">상담 신청하기</a>
+    </div>
+</div>
+
+<form id="searchForm" method="get" action="{{ url_for('question._list') }}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}" />
+    <input type="hidden" id="page" name="page" value="{{ page }}" />
+</form>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function (element) {
+        element.addEventListener("click", function () {
+            document.getElementById("page").value = this.dataset.page;
+            document.getElementById("searchForm").submit();
+        });
+    });
+
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener("click", function () {
+        document.getElementById("kw").value =
+            document.getElementById("search_kw").value;
+        document.getElementById("page").value = 1; // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        document.getElementById("searchForm").submit();
+    });
+</script>
+{% endblock %}

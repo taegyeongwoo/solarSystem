@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제휴제안</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-check label {
+            font-weight: normal;
+        }
+
+        .btn-submit {
+            background-color: #03C75A;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #F1F1F1;
+            color: black;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            color: #03C75A;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            border-bottom: 2px solid black;
+            padding: 10px;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Solartec</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시공사 공고</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">대리 견적 요청</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Page 1</a>
+                        <a class="dropdown-item" href="#">Page 2</a>
+                        <a class="dropdown-item" href="#">Page 3</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="btn btn-primary ml-auto" href="#">문의</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="container">
+        <!-- 투자 신청 폼 -->
+        <h3>투자 신청 폼</h3>
+        <p>투자 신청 및 제안은 본 시스템을 통해 온라인 입력 형식으로 접수되며 제안 내용 및 관련내용은 제휴 접수 확인적으로만 이용됩니다.</p>
+        <p style="color: red;">* ...에 휴대폰 번호 및 ... 정보가 공개됩니다.</p>
+        <!-- 투자 신청 폼 목록 -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+                    aria-selected="true">발전소 정보</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="system-tab" data-toggle="tab" href="#system" role="tab" aria-controls="system"
+                    aria-selected="false">시스템 정보</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="status-tab" data-toggle="tab" href="#status" role="tab" aria-controls="status"
+                    aria-selected="false">개인정보 수집 동의</a>
+            </li>
+        </ul>
+        <!-- 투자 신청 폼 상세내용 -->
+        <div class="tab-content" id="myTabContent">
+            <!-- (1) 발전소 정보 -->
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                <br>
+                <h4>물건 개요</h4>
+                <p>제휴제안은 지역에 관계없이 NAVER N-SQUARE(NAVER 사옥), NAVER 1784(NAVER 신사옥) 및 INGRAMAX 외부 쇼핑몰에서 협의 접수 될 수 있습니다.</p>
+                <p>제휴제안 사이트와 제안 제품을 등록하고자 하는 사전 협의에 따라 제안서를 작성해 주시길 바랍니다.</p>
+                <p>* 표시는 필수 항목입니다.</p>
+                <!-- 1. 물건 정보 -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="font-weight: bold;">물건 정보</div>
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="strage-kind" class="required">용량 구분</label>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="strage-kind">
+                                            <option>태양광의 용량을 선택해 주세요.</option>
+                                            <option>용량 1</option>
+                                            <option>용량 2</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="state" class="required">현재 상태</label>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="construction-type"
+                                                id="construction-type1" value="construction-before" required>
+                                            <label class="form-check-label" for="construction-type1">공사전</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="construction-type"
+                                                id="construction-type2" value="construction-ing" required>
+                                            <label class="form-check-label" for="construction-type2">공사중</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="construction-type"
+                                                id="construction-type3" value="construction-after" required>
+                                            <label class="form-check-label" for="construction-type3">완공</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>잔존 구획 수</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="total-sections"
+                                            placeholder="총 구획">
+                                        <input type="text" class="form-control" id="remaining-sections"
+                                            placeholder="잔여 구획">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="contract" class="required">토지 계약</label>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contract-type"
+                                                id="contract-type1" value="contract-temporary" required>
+                                            <label class="form-check-label" for="contract-type1">임대</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="contract-type"
+                                                id="contract-type2" value="contract-permanent" required>
+                                            <label class="form-check-label" for="contract-type2">매매</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 2. 발전/매전 정보 -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="font-weight: bold;">발전/매전 정보</div>
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="observation-point" class="required">
+<label for="observation-point" class="required">관측 지점</label>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="observation-point">
+                                            <option>관측 지점을 선택해주세요.</option>
+                                            <option>지점 1</option>
+                                            <option>지점 2</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>연간발전량</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="annual-production" placeholder="연간발전량"> kWh
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>매전단가 REC/SMP</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="sale-price" placeholder="매전단가"> 원/kWh
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>매전 수입 / 년</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="annual-revenue" placeholder="매전수입 / 년"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>잔존 매전 수입</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="remaining-revenue" placeholder="잔존 매전 수입"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>누적 수입</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="accumulated-revenue" placeholder="누적 수입"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 3. 가격 정보 -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="font-weight: bold;">가격 정보</div>
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>토지 가격</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="land-price" placeholder="토지 가격"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>시스템 가격</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="system-price" placeholder="시스템 가격"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 4. 파이낸스 정보 -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="font-weight: bold;">파이낸스 정보</div>
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>이용가능한 신판회사</td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="available-finance" placeholder="이용가능한 신판회사"> 원
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- (2) 시스템 정보 -->
+            <div class="tab-pane fade" id="system" role="tabpanel" aria-labelledby="system-tab">
+                <br>
+                <h4>시스템 정보</h4>
+                <p>제휴제안은 지역에 관계없이 NAVER N-SQUARE(NAVER 사옥), NAVER 1784(NAVER 신사옥) 및 INGRAMAX 외부 쇼핑몰에서 협의 접수 될 수 있습니다.</p>
+                <p>제휴제안 사이트와 제안 제품을 등록하고자 하는 사전 협의에 따라 제안서를 작성해 주시길 바랍니다.</p>
+                <p>* 표시는 필수 항목입니다.</p>
+                <!-- 시스템 정보 내용 시작 -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div style="font-weight: bold;">시스템 정보</div>
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>제조사</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="manufacturer" placeholder="제조사">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>시스템 용량</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="system-capacity" placeholder="시스템 용량">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>형식</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="model-type" placeholder="형식">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>최대출력</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="max-output" placeholder="최대출력"> kW
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>변환효율</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="conversion-efficiency" placeholder="변환효율"> %
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>출력보증 (년)</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="output-warranty" placeholder="출력보증"> 년
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>제품보증 (년)</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="product-warranty" placeholder="제품보증"> 년
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>감시시스템</td>
+                                    <td>
+                                        <select class="form-control" id="monitoring-system">
+                                            <option>유</option>
+                                            <option>무</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>서비스 비용</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="service-cost" placeholder="서비스 비용"> 원
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- (3) 개인정보 수집 동의 -->
+            <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
+                <br>
+                <h4>개인정보 수집 및 이용에 대한 안내</h4>
+                <p>개인정보 수집 및 이용에 대한 동의는 제휴 제안 접수에 필수적입니다.</p>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="privacy-policy" required>
+                    <label class="form-check-label" for="privacy-policy">개인정보 수집 및 이용에 동의합니다.</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="terms-conditions" required>
+                    <label class="form-check-label" for="terms-conditions">약관에 동의합니다.</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-submit">제출</button>
+                <button type="reset" class="btn btn-cancel">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

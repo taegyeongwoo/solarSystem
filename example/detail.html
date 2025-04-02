@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Solartec</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시공사 공고</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">대리 견적 요청</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Page 1</a>
+                        <a class="dropdown-item" href="#">Page 2</a>
+                        <a class="dropdown-item" href="#">Page 3</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="btn btn-primary ml-auto" href="#">문의</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="container product-detail">
+        <div class="product-image">
+            <img src="solar.jpg" alt="강진군 태양광 패널">
+        </div>
+        <div class="product-info">
+            <div class="state">판매중</div>
+            <h1>광주광역시 태양광 패널</h1>
+            <div class="summary-info">
+                <table>
+                    <tr>
+                        <td>판매가격</td>
+                        <td>
+                            {{ 23,500 }}만원
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>예상 수익률</td>
+                    <!--<td><input type="text" value="소유주명"></td>-->
+                        <td>{{ 9.87 }}% / {{ 23212 }}만원</td>
+                    </tr>
+                    <tr>
+                        <td>매전단가(REC/SMP)</td>
+                        <td>{{ 3065 }} kW</td>
+                    </tr>
+                    <tr>
+                        <td>개통년월</td>
+                        <td>{{ 3065 }}년 {{ 4 }}월 {{ 22 }}일</td>
+                    </tr>
+                    <!--<tr>
+                        <td>주소</td>
+                        <td>
+                            <select>
+                                <option value="address1">Address 1</option>
+                                <option value="address2">Address 2</option>
+                                <option value="address3">Address 3</option>
+                            </select>
+                        </td>
+                    </tr>-->
+                </table>
+            </div>
+            <button class="estimate">견적 요청</button>
+        </div>
+    </div>
+
+    <!-- Menu Start -->
+    <div class="container mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#detail" data-toggle="tab">상세정보</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#owner" data-toggle="tab">소유주 정보</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#profit" data-toggle="tab">예상 수익률</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#data" data-toggle="tab">데이터</a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="detail">
+                <!-- 상세정보 내용 -->
+                <table class="table table-bordered">
+                    <tr> <!-- title of table -->
+                        <th colspan="4" class="attribute-title">TRADE - 645 여주시 점동면 (태양광 발전소 이름 / 주소)</th>
+                    </tr>
+                    <tr> <!-- 1행 -->
+                        <td class="attribute-name">주소</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">시설 용량(PV)</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 2행 -->
+                        <td class="attribute-name">설치 타입</td>
+                        <td class="attribute-value">{{ 고정형 }}</td>
+                        <td class="attribute-name">모듈</td>
+                        <td class="attribute-value">{{ Trina (양면 405w * 2,466장) }}</td>
+                    </tr>
+                    <tr> <!-- 3행 -->
+                        <td class="attribute-name">가중치</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">인버터</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 4행 -->
+                        <td class="attribute-name">건축</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">REC</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 5행 -->
+                        <td class="attribute-name">토지면적</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">모니터링</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 6행 -->
+                        <td class="attribute-name">지역/지구</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">준공개시일 REC 판매일</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 7행 -->
+                        <td class="attribute-name">지목</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">방위/경사</td>
+                        <td class="attribute-value">{{ 정남 }} / {{ 15~23 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 8행 -->
+                        <th colspan="4">산지 임대부지 사용 중, 일시 사용 승락<br>임대료 보증금 4천만원_1,110만원 / 년</th>
+                    </tr>
+                    <!-- 필요한 행 추가 -->
+                </table>
+            </div>
+            <div class="tab-pane fade show active" id="owner">
+                <!-- 소유주 정보 -->
+                <table class="table table-bordered">
+                    <tr> <!-- title of table -->
+                        <th colspan="2" class="attribute-title">기본정보 등록</th>
+                    </tr>
+                    <tr> <!-- 1행 -->
+                        <td class="attribute-name">발전소 용량</td>
+                        <td class="attribute-value">{{ 450 }} kwp</td>
+                    </tr>
+                    <tr> <!-- 2행 -->
+                        <td class="attribute-name">매매가</td>
+                        <td class="attribute-value">{{ 고정형 }}</td>
+                        <td class="attribute-name">모듈</td>
+                        <td class="attribute-value">{{ Trina (양면 405w * 2,466장) }}</td>
+                    </tr>
+                    <tr> <!-- 3행 -->
+                        <td class="attribute-name">가중치</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">인버터</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 4행 -->
+                        <td class="attribute-name">건축</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">REC</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 5행 -->
+                        <td class="attribute-name">토지면적</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">모니터링</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 6행 -->
+                        <td class="attribute-name">지역/지구</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">준공개시일 REC 판매일</td>
+                        <td class="attribute-value">{{ 998.73 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 7행 -->
+                        <td class="attribute-name">지목</td>
+                        <td class="attribute-value">{{ 경기 여주시 점동면 }}</td>
+                        <td class="attribute-name">방위/경사</td>
+                        <td class="attribute-value">{{ 정남 }} / {{ 15~23 }} kWp</td>
+                    </tr>
+                    <tr> <!-- 8행 -->
+                        <th colspan="4">산지 임대부지 사용 중, 일시 사용 승락<br>임대료 보증금 4천만원_1,110만원 / 년</th>
+                    </tr>
+                    <!-- 필요한 행 추가 -->
+                </table>
+            </div>
+            <div class="tab-pane fade" id="profit">
+                <!-- 예상 수익률 내용 -->
+                <table class="table table-bordered">
+                    <tr> <!-- title of table -->
+                        <th colspan="3" class="attribute-title">예상 수익률</th>
+                    </tr>
+                    <tr> <!-- 1행 -->
+                        <td class="attribute-name">요약</td>
+                        <td colspan="2" class="attribute-value">산지 임대부지 사용 중, 일시 사용 승락<br>임대료 보증금 4천만원_1,110만원 / 년</td>
+                    </tr>
+                    <tr> <!-- 2행 -->
+                        <td class="attribute-name">연 평균 순익</td>
+                        <td class="attribute-value">약 {{ 2억 }}</td>
+                        <td class="attribute-value">발전시간 {{ 3.82 }}시간 기준
+                            <br>(smp {{ 164.353 }}원 기준으로 계산되었습니다.
+                            <br>24개월 평균 발전시간 {{ 3.82 }} 기준)</td>
+                    </tr>
+                    <tr> <!-- 3행 -->
+                        <td class="attribute-name">월 평균 관리비</td>
+                        <td class="attribute-value">{{ 90 }}만원</td>
+                        <td class="attribute-value">안전관리비 {{ 70 }}, 소내전기 요금 등</td>
+                    </tr>
+                    <tr> <!-- 4행 -->
+                        <td class="attribute-name">년 보험료</td>
+                        <td class="attribute-value">{{  }}만원</td>
+                        <td class="attribute-value">미가입_추후 가입가능</td>
+                    </tr>
+                    <!-- 필요한 행 추가 -->
+                </table>
+            </div>
+            <div class="tab-pane fade" id="data">
+                <!-- 데이터 내용 -->
+                <table class="table table-bordered">
+                    <tr> <!-- title of table -->
+                        <th colspan="6" class="attribute-title">태양광발전소 수익성 분석표</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>발전량</th>
+                        <th>smp(고정)</th>
+                        <th>매출 합</th>
+                        <th>유지보수 및 예비비</th>
+                        <th>수익</th>
+                    </tr>
+                    <tr>
+                        <td class="table-title">1년차</td>
+                        <td class="table-value">1,234,000</td>
+                        <td class="table-value"></td>
+                        <td class="table-value"></td>
+                        <td class="table-value"></td>
+                        <td class="table-value"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Menu End -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

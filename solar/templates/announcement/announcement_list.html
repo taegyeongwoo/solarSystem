@@ -1,0 +1,207 @@
+{% extends 'base.html' %} {% block head %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/announcement_list.css') }}"
+/>
+{% endblock %} {% block content %}
+<div class="container my-3">
+    <!-- Header Section Start -->
+    <div class="header">
+        <h1>태양광 판매 공고</h1>
+        <p>
+            Browse the available solar plants and find the best options for your
+            investment.
+        </p>
+    </div>
+    <!-- Header Section End -->
+
+    <!-- 검색 조건 Start -->
+    <div class="container">
+        <div class="filter-section">
+            <label>지역</label>
+            <select>
+                <option>특별시</option>
+            </select>
+            <select>
+                <option>구/군</option>
+            </select>
+            <input type="checkbox" id="imageRatio" checked /><label
+                for="imageRatio"
+                >이미지 비율</label
+            >
+            <input type="checkbox" id="transparent" checked /><label
+                for="transparent"
+                >선명하게</label
+            >
+            <select>
+                <option>Hover</option>
+            </select>
+            <select>
+                <option>4개</option>
+            </select>
+            <input type="number" value="10" min="0" max="100" />px 상품 간격
+        </div>
+        <div class="filter-section">
+            <label>텍스트 정렬</label>
+            <select>
+                <option>왼쪽</option>
+            </select>
+            <input type="number" value="16" min="0" max="100" />px
+            <input type="number" value="14" min="0" max="100" />px 상품명
+            <input type="color" value="#000000" />
+            <input type="number" value="14" min="0" max="100" />px 판매가
+            <input type="checkbox" id="bold" checked /><label for="bold"
+                >굵게</label
+            >
+            <input type="color" value="#000000" />
+            <input type="number" value="14" min="0" max="100" />px 요약설명
+        </div>
+    </div>
+    <!-- 검색 조건 End -->
+
+    <!-- Controls Section Start -->
+    <div class="controls">
+        <div class="left">
+            <button>Show Sidebar</button>
+            <select>
+                <option>Default sorting</option>
+            </select>
+        </div>
+        <div class="right">
+            <p>SHOWING 1–3 OF {{ question_list.items|length }} RESULTS</p>
+        </div>
+    </div>
+    <!-- Controls Section End -->
+
+    <!-- Product Grid Start -->
+    <div class="product-grid">
+        {% if question_list %} {% for question in question_list.items %}
+        <div class="product">
+            <!-- 배지: 추천이 있을 경우 배지 표시 -->
+            {% if question.voter|length > 0 %}
+            <div class="badge hot">추천 {{ question.voter|length }}</div>
+            {% endif %}
+
+            <!-- 이미지: 기본 이미지 사용 -->
+            <img src="https://via.placeholder.com/300" alt="Solar Panel" />
+
+            <!-- 질문 제목 -->
+            <h3>
+                <a
+                    href="{{ url_for('announcement.detail', question_id=question.id) }}"
+                    >{{ question.subject }}</a
+                >
+            </h3>
+
+            <!-- 판매 상태 -->
+            <div class="badge sale">판매 완료</div>
+
+            <!-- 작성자 이름 -->
+            <div class="author">작성자: {{ question.user.username }}</div>
+
+            <!-- 작성일시 -->
+            <div class="date">
+                작성일시: {{ question.create_date|datetime }}
+            </div>
+        </div>
+        {% endfor %} {% else %}
+        <div class="product">
+            <div class="badge">No Questions</div>
+            <img src="https://via.placeholder.com/300" alt="No Questions" />
+            <h3>질문이 없습니다.</h3>
+        </div>
+        {% endif %}
+    </div>
+    <!-- Product Grid End -->
+
+    <!-- Controls Section Start -->
+    <div class="controls">
+        <div class="left">
+            <a href="{{ url_for('announcement.create') }}" class="btn-primary"
+                >판매글 올리기</a
+            >
+            <select class="form-control">
+                <option>Default sorting</option>
+            </select>
+        </div>
+        <div class="right">
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="search_kw"
+                    class="form-control"
+                    placeholder="Search..."
+                    value="{{ kw or '' }}"
+                />
+                <div class="input-group-append">
+                    <button
+                        class="btn-outline-secondary"
+                        type="button"
+                        id="btn_search"
+                    >
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Controls Section End -->
+
+    <!-- Pagination Section Start -->
+    <div class="pagination">
+        <div class="left">
+            {% if question_list.has_prev %}
+            <button
+                onclick="location.href='?page={{ question_list.prev_num }}'"
+            >
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            {% endif %} {% for page_num in question_list.iter_pages() %} {% if
+            page_num %}
+            <button
+                class="{% if page_num == question_list.page %}active{% endif %}"
+                onclick="location.href='?page={{ page_num }}'"
+            >
+                {{ page_num }}
+            </button>
+            {% endif %} {% endfor %} {% if question_list.has_next %}
+            <button
+                onclick="location.href='?page={{ question_list.next_num }}'"
+            >
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+            {% endif %}
+        </div>
+        <div class="right">
+            <p>
+                SHOWING {{ question_list.page }}–{{ question_list.pages }} OF {{
+                question_list.total }} RESULTS
+            </p>
+        </div>
+    </div>
+    <!-- Pagination Section End -->
+</div>
+
+<form id="searchForm" method="get" action="{{ url_for('announcement._list') }}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}" />
+    <input type="hidden" id="page" name="page" value="{{ page }}" />
+</form>
+{% endblock %} {% block script %}
+<script type="text/javascript">
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function (element) {
+        element.addEventListener("click", function () {
+            document.getElementById("page").value = this.dataset.page;
+            document.getElementById("searchForm").submit();
+        });
+    });
+
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener("click", function () {
+        document.getElementById("kw").value =
+            document.getElementById("search_kw").value;
+        document.getElementById("page").value = 1; // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        document.getElementById("searchForm").submit();
+    });
+</script>
+{% endblock %}

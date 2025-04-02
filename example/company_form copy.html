@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제휴제안</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-check label {
+            font-weight: normal;
+        }
+        .btn-submit {
+            background-color: #03C75A;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #F1F1F1;
+            color: black;
+        }
+    </style>
+    </head>
+    
+    <body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Solartec</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시공사 공고</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">대리 견적 요청</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Page 1</a>
+                        <a class="dropdown-item" href="#">Page 2</a>
+                        <a class="dropdown-item" href="#">Page 3</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="btn btn-primary ml-auto" href="#">문의</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="container">
+        <h2>투자 신청 폼</h2>
+        <p>투자 신청 및 제안은 본 시스템을 통해 온라인 입력 형식으로 접수되며 제안 내용 및 관련내용은 제휴 접수 확인적으로만 이용됩니다.</p>
+        <p>* ...에 휴대폰 번호 및 ... 정보가 공개됩니다.</p>
+        
+        <h4>주요 서비스 및 제안 제품 및 문의</h4>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">노출/매체 제휴</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">콘텐츠 제휴</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">앱/웹 사이트 제휴</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 다른 카드들 추가 -->
+        </div>
+        
+        <h4>제휴제안 내용</h4>
+        <form>
+            <div class="form-group">
+                <label for="proposal-site">제휴 제안 사이트</label>
+                <select class="form-control" id="proposal-site">
+                    <option>사이트를 선택해주세요.</option>
+                    <!-- 옵션들 추가 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="proposal-category">제휴 구분</label>
+                <select class="form-control" id="proposal-category">
+                    <option>제휴 구분을 선택해주세요.</option>
+                    <!-- 옵션들 추가 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="proposal-title">제목</label>
+                <input type="text" class="form-control" id="proposal-title" placeholder="제목을 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="proposal-content">내용</label>
+                <textarea class="form-control" id="proposal-content" rows="5" placeholder="내용을 입력해주세요."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="proposal-file">제휴제안 첨부</label>
+                <input type="file" class="form-control-file" id="proposal-file">
+            </div>
+            
+            <h4>제휴제안 업체정보</h4>
+            <div class="form-group">
+                <label for="company-type">구분</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="company-type" id="company-type1" value="corporation">
+                        <label class="form-check-label" for="company-type1">법인</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="company-type" id="company-type2" value="individual">
+                        <label class="form-check-label" for="company-type2">개인</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="company-type" id="company-type3" value="etc">
+                        <label class="form-check-label" for="company-type3">기타</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="company-name">회사명</label>
+                <input type="text" class="form-control" id="company-name" placeholder="회사명을 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="contact-name">담당자명</label>
+                <input type="text" class="form-control" id="contact-name" placeholder="담당자명을 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="contact-phone">연락처</label>
+                <input type="text" class="form-control" id="contact-phone" placeholder="연락처를 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="contact-email">이메일</label>
+                <input type="email" class="form-control" id="contact-email" placeholder="이메일을 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="company-address">회사 주소</label>
+                <input type="text" class="form-control" id="company-address" placeholder="회사 주소를 입력해주세요.">
+            </div>
+            <div class="form-group">
+                <label for="company-website">웹사이트</label>
+                <input type="text" class="form-control" id="company-website" placeholder="웹사이트 주소를 입력해주세요.">
+            </div>
+            
+            <h4>개인정보 수집 및 이용에 대한 안내</h4>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="privacy-policy">
+                <label class="form-check-label" for="privacy-policy">개인정보 수집 및 이용에 동의합니다.</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="terms-conditions">
+                <label class="form-check-label" for="terms-conditions">약관에 동의합니다.</label>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">제휴제안 보내기</button>
+            <button type="reset" class="btn btn-cancel">취소</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script></body></html>

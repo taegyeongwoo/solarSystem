@@ -1,0 +1,432 @@
+{% extends 'base.html' %} {% block head %}
+
+<style>
+    /* 마우스 근처에 표시될 정보 박스 스타일 */
+    .map-tooltip {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        pointer-events: none;
+        display: none;
+        white-space: nowrap;
+    }
+
+    .container {
+        display: flex; /* Flexbox를 활성화하여 자식 요소를 나란히 배치 */
+        justify-content: space-between; /* 요소 간의 간격 조정 */
+        align-items: flex-start; /* 상단 정렬 */
+    }
+
+    #map_region {
+        flex: 1; /* 너비 비율을 설정 */
+        margin-right: 0px; /* 오른쪽 여백 추가 */
+    }
+
+    #li_region {
+        flex: 0.5; /* 두 번째 요소의 너비 비율 설정 */
+    }
+</style>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/index_style.css') }}"
+/>
+
+{% endblock %} {% block content %}
+<!-- Hero Section Start -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>Solar</h1>
+        <p>
+            태양광 발전소를 기반으로<br />컴퓨터시스템 통합 자문 및 구축
+            서비스업을 맡고 있는<br /><b style="color: #0dab33"
+                >(주)일주지앤에스</b
+            >입니다.
+        </p>
+        <h1>Tec</h1>
+    </div>
+    <!--
+    <div class="scroll-down">
+        <a href="#info-section">(주)일주지앤에스</a>
+    </div>-->
+</div>
+<!-- Hero Section End -->
+
+<!-- Info Section Start -->
+<div class="info-section" id="info-section">
+    <!--<img
+        src="{{ url_for('static', filename='imgs/t2.png') }}"
+        style="width: 100%"
+    />-->
+    <div class="container d-flex">
+        <h2 class="flex-shrink-0">발전소 거래 플랫폼<br />사용 안내</h2>
+        <div class="subcontainer">
+            <p>
+                태양광 발전소의 원활한 거래를 위해 필요한 정보를 정리해
+                놓았습니다. <br />원하시는 서비스를 선택하시면 실행 과정, 실행
+                방법, 신청 서류 등 <br />다양한 정보가 구비되어 있습니다.
+                <br /><b class="text-emphasis">SolarTec</b>을 활용하여 신뢰성
+                있는 투자를 시작해보세요.
+            </p>
+            <br />
+            <ul class="justify-content-between" style="padding-left: 0">
+                <li class="btn btn-custom">
+                    <a href="{{ url_for('main.company') }}">회사 소개</a>
+                </li>
+                <li class="btn btn-custom">
+                    <a href="{{ url_for('main.platform_guide') }}"
+                        >플랫폼 안내</a
+                    >
+                </li>
+            </ul>
+            <h3>설명서</h3>
+            <ul class="justify-content-between" style="padding-left: 0">
+                <li class="btn btn-custom">발전소 판매 설명서</li>
+                <li class="btn btn-custom">발전소 구매 설명서</li>
+                <li class="btn btn-custom">대리 견적 설명서</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Info Section End -->
+
+<!-- Services Section Start -->
+<div class="services-section">
+    <!-- 기존 services 섹션 내용 -->
+</div>
+
+<!-- Announcement Section Start -->
+<div class="container announcement-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-img-container">
+                        <img
+                            src="{{ url_for('static', filename='imgs/home_card_handover.jpg') }}"
+                            class="card-img-top"
+                            alt="Image"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">판매 신청</h5>
+                        <p class="card-text">
+                            회사 및 개인 판매자들이 판매하는 발전소에 대한
+                            가치평가를 제공해 드립니다.
+                        </p>
+                        <a href="#" class="btn btn-view">View More</a>
+                    </div>
+                    <div class="circle">
+                        <span>😊</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-img-container">
+                        <img
+                            src="{{ url_for('static', filename='imgs/home_card_solar.jpg') }}"
+                            class="card-img-top"
+                            alt="Image"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">판매 공고</h5>
+                        <p class="card-text">
+                            회사 및 개인 판매자들이 판매하는 발전소를
+                            확인하시고, 투자를 결정하세요.
+                        </p>
+                        <a
+                            href="{{ url_for('main.announcement') }}"
+                            class="btn btn-view"
+                            >View More</a
+                        >
+                    </div>
+                    <div class="circle">
+                        <span>😊</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-img-container">
+                        <img
+                            src="{{ url_for('static', filename='imgs/home_card_invest.jpg') }}"
+                            class="card-img-top"
+                            alt="Image"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">대리 견적 문의</h5>
+                        <p class="card-text">
+                            (주)일주지앤에스에 견적을 문의하여 빠르고 간편하게
+                            투자정보를 받아보세요.
+                        </p>
+                        <a
+                            href="{{ url_for('put.plant_sale') }}"
+                            class="btn btn-view"
+                            >View More</a
+                        >
+                    </div>
+                    <div class="circle">
+                        <span>😊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Services Section End -->
+
+<!-- Announcement Section Start -->
+<div class="container announcement-section">
+    <div
+        class="announcement"
+        style="background-color: #053807; color: white"
+        id="announcement2"
+    >
+        <h3>공지사항 <span class="text-muted">| 더보기</span></h3>
+        <hr style="border-color: white" />
+        <button class="more-btn" onclick="showMore('announcement2')">+</button>
+        <ul>
+            <li>
+                <span class="announcement-title">필독사항</span>
+                <span class="announcement-date">2023.09.22</span>
+            </li>
+            <li>
+                <span class="announcement-title">홈페이지 개설 안내</span>
+                <span class="announcement-date">2024.08.05</span>
+            </li>
+            <li>
+                <span class="announcement-title"
+                    >홈페이지 리뉴얼로 인한 배포 지연</span
+                >
+                <span class="announcement-date">2024.08.04</span>
+            </li>
+            <li>
+                <span class="announcement-title">회사 소개</span>
+                <span class="announcement-date">2020.09.24</span>
+            </li>
+            <li>
+                <span class="announcement-title">회사 이벤트 소개</span>
+                <span class="announcement-date">2020.09.24</span>
+            </li>
+        </ul>
+    </div>
+    <div class="announcement" id="announcement1">
+        <h3>보도자료 <span class="text-muted">| 00</span></h3>
+        <hr />
+        <button class="more-btn" onclick="showMore('announcement1')">+</button>
+        <ul class="news-container">
+            <li class="news-item">
+                <a href="https://m.etnews.com/20240702000022">
+                    <img
+                        src="https://img.etnews.com/news/article/2024/07/02/news-p.v1.20240702.bc02b2b9a8b14ffeb4276aa3c420acd6_P1.png"
+                        class="img_news"
+                        target="_blank"
+                        alt="뉴스1"
+                    />
+                    <div class="news-title">
+                        일주지앤에스, 동명대와 반려동물사업 산학협력
+                    </div>
+                    <div class="news-date">2024.07.02</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a
+                    href="https://biz.chosun.com/industry/industry_general/2023/10/27/ZEKVSZPLYJDFZJBI4BI7EEFMII/"
+                >
+                    <img
+                        src="https://biz.chosun.com/resizer/CbhEiGMIovMFAv0yReEBevKPCDc=/600x213/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/EKP2CR4JGJBOZPXHVPR2L37FGA.jpg"
+                        class="img_news"
+                        target="_blank"
+                        alt="뉴스2"
+                    />
+                    <div class="news-title">
+                        일주지앤에스, 그린 비즈니스 위크 2023서 태양광 에너지
+                        플랫폼 ‘햇나’ 선보인다
+                    </div>
+                    <div class="news-date">2023.10.27</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Announcement Section End -->
+
+<!-- Map Start -->
+<div class="container">
+    <h3>발전소 공고 바로가기</h3>
+    <div id="map_region">
+        <div class="map-tooltip" id="map-tooltip"></div>
+        <!-- 마우스 근처에 지역 이름 표시 -->
+        <object
+            id="svg-map"
+            type="image/svg+xml"
+            data="../static/imgs/southKoreaLow.svg"
+            width="45%"
+            height="500"
+        >
+            <!-- SVG 파일이 로드되지 않을 때 보이는 텍스트 -->
+            SVG 이미지를 불러올 수 없습니다.
+        </object>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                const tooltip = $("#map-tooltip");
+                const svgMap = document.getElementById("svg-map");
+
+                // SVG가 로드되면 이벤트 리스너 추가
+                svgMap.addEventListener("load", () => {
+                    const svgDoc = svgMap.contentDocument;
+
+                    // 모든 지역 요소를 가져옴 (class="land" 요소들)
+                    const regions = svgDoc.querySelectorAll(".land");
+
+                    regions.forEach((region) => {
+                        $(region)
+                            .on("mouseenter", function () {
+                                let name = $(this).attr("title"); // title 속성으로 지역 이름 가져오기
+
+                                // 특정 title 값에 따라 한글로 이름 변경
+                                if (name === "Seoul") {
+                                    name = "서울특별시";
+                                } else if (name === "Busan") {
+                                    name = "부산광역시";
+                                } else if (name === "Daegu") {
+                                    name = "대구광역시";
+                                } else if (name === "Incheon") {
+                                    name = "인천광역시";
+                                } else if (name === "Gwangju") {
+                                    name = "광주광역시";
+                                } else if (name === "Daejeon") {
+                                    name = "대전광역시";
+                                } else if (name === "Ulsan") {
+                                    name = "울산광역시";
+                                } else if (name === "Gyeonggi") {
+                                    name = "경기도";
+                                } else if (name === "Gangwon") {
+                                    name = "강원도";
+                                } else if (name === "North Chungcheong") {
+                                    name = "충청북도";
+                                } else if (name === "South Chungcheong") {
+                                    name = "충청남도";
+                                } else if (name === "North Jeolla") {
+                                    name = "전라북도";
+                                } else if (name === "South Jeolla") {
+                                    name = "전라남도";
+                                } else if (name === "North Gyeongsang") {
+                                    name = "경상북도";
+                                } else if (name === "South Gyeongsang") {
+                                    name = "경상남도";
+                                } else if (name === "Jeju") {
+                                    name = "제주특별자치도";
+                                } else if (name === "Sejong") {
+                                    name = "세종시";
+                                } // 여기 추가된 닫는 중괄호
+
+                                tooltip.text(`${name}`).show();
+                            })
+                            .on("mouseleave", function () {
+                                tooltip.hide();
+                            });
+                    });
+                });
+
+                // 마우스 이동에 따라 툴팁 위치 업데이트
+                $(document).mousemove(function (e) {
+                    tooltip.css({
+                        top: e.pageY - tooltip.outerHeight() - 10, // 마우스 위쪽으로 약간 띄움
+                        left: e.pageX, // 마우스 오른쪽에 위치
+                    });
+                });
+            });
+        </script>
+    </div>
+
+    <div id="li_region">
+        <dl>
+            <dd class="region_title">
+                특별시
+                <ul class="region_content">
+                    <button class="region_btn">서울특별시</button>
+                </ul>
+            </dd>
+            <dd class="region_title">
+                광역시
+                <ul class="region_content">
+                    <button class="region_btn">부산광역시</button>
+                    <button class="region_btn">인천광역시</button>
+                    <button class="region_btn">대구광역시</button>
+                    <button class="region_btn">대전광역시</button>
+                    <button class="region_btn">광주광역시</button>
+                    <button class="region_btn">울산광역시</button>
+                </ul>
+            </dd>
+            <dd class="region_title">
+                특별자치시
+                <ul class="region_content">
+                    <button class="region_btn">세종특별자치시</button>
+                </ul>
+            </dd>
+            <dd class="region_title">
+                도
+                <ul class="region_content">
+                    <button class="region_btn">경기도</button>
+                    <button class="region_btn">충청북도</button>
+                    <button class="region_btn">충청남도</button>
+                    <button class="region_btn">전라남도</button>
+                    <button class="region_btn">경상북도</button>
+                    <button class="region_btn">경상남도</button>
+                </ul>
+            </dd>
+            <dd class="region_title">
+                특별 자치도
+                <ul class="region_content">
+                    <button class="region_btn">강원특별자치도</button>
+                    <button class="region_btn">전북특별자치도</button>
+                    <button class="region_btn">제주특별자치도</button>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>
+<!-- Map End -->
+
+<!-- 하단 배너 -->
+<div class="section">
+    <div class="left-box">
+        <div class="content">
+            <h3>소통공간</h3>
+            <div class="btn-group">
+                <a href="#" class="btn">자유게시판</a>
+                <a href="#" class="btn">자료 공유</a>
+            </div>
+        </div>
+    </div>
+    <div class="right-box">
+        <div class="background-image"></div>
+        <div class="content">
+            <h3>문자서비스 신청</h3>
+            <a href="#" class="btn">View More</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %}
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    function showMore(announcementId) {
+        if (announcementId === "announcement1") {
+            window.location.href = "announcement1-more.html";
+        } else if (announcementId === "announcement2") {
+            window.location.href = "announcement2-more.html";
+        }
+    }
+</script>
+{% endblock %}

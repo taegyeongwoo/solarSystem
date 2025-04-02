@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>탭 예시 - 기본 틀</title>
+        <!-- Bootstrap CSS (예: v4.5.2) -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <style>
+            /* 선택 사항: 탭 모양이나 색상 등을 커스터마이징 하는 CSS */
+            .nav-tabs .nav-link.active {
+                font-weight: bold;
+                color: #03c75a;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <!-- 탭 제목 영역 -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- 발전소 정보 탭 -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link active"
+                        id="info-tab"
+                        data-toggle="tab"
+                        href="#info"
+                        role="tab"
+                        aria-controls="info"
+                        aria-selected="true"
+                    >
+                        발전소 정보
+                    </a>
+                </li>
+                <!-- 시스템 정보 탭 -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        id="system-tab"
+                        data-toggle="tab"
+                        href="#system"
+                        role="tab"
+                        aria-controls="system"
+                        aria-selected="false"
+                    >
+                        시스템 정보
+                    </a>
+                </li>
+                <!-- 개인정보 수집 동의 탭 -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        id="privacy-tab"
+                        data-toggle="tab"
+                        href="#privacy"
+                        role="tab"
+                        aria-controls="privacy"
+                        aria-selected="false"
+                    >
+                        개인정보 수집 동의
+                    </a>
+                </li>
+            </ul>
+
+            <!-- 탭별 컨텐츠 영역 -->
+            <div class="tab-content" id="myTabContent">
+                <!-- 발전소 정보 내용 -->
+                <div
+                    class="tab-pane fade show active p-3"
+                    id="info"
+                    role="tabpanel"
+                    aria-labelledby="info-tab"
+                >
+                    <h4>발전소 정보</h4>
+                    <p>여기에 발전소 관련 내용을 표시하세요.</p>
+                </div>
+
+                <!-- 시스템 정보 내용 -->
+                <div
+                    class="tab-pane fade p-3"
+                    id="system"
+                    role="tabpanel"
+                    aria-labelledby="system-tab"
+                >
+                    <h4>시스템 정보</h4>
+                    <p>여기에 시스템 관련 내용을 표시하세요.</p>
+                </div>
+
+                <!-- 개인정보 수집 동의 내용 -->
+                <div
+                    class="tab-pane fade p-3"
+                    id="privacy"
+                    role="tabpanel"
+                    aria-labelledby="privacy-tab"
+                >
+                    <h4>개인정보 수집 동의</h4>
+                    <p>
+                        개인정보 수집 및 이용에 대한 내용을 안내하고 동의받을 수
+                        있습니다.
+                    </p>
+                    <!-- 필요한 경우, 체크박스나 버튼 등을 추가 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS, Popper.js, jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

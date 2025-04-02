@@ -1,0 +1,134 @@
+/* FAQ 섹션 스타일 */
+.faq-section {
+    padding: 40px 0;
+    background: #fff;
+}
+
+.faq-section h2 {
+    color: #053807;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.accordion-item {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    padding: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    background-color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1e7;
+    color: #053807;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: #e0e0e0;
+}
+
+.accordion-button::after {
+    background-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-body {
+    padding: 1.2rem;
+    background-color: #fff;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 문의하기 섹션 스타일 */
+.contact-section {
+    background: #053807;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(13, 171, 51, 0.1) 0%,
+        rgba(5, 56, 7, 0.1) 100%
+    );
+    pointer-events: none;
+}
+
+.contact-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.contact-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    position: relative;
+}
+
+.contact-section .btn-custom {
+    background: #0dab33;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    border: 2px solid transparent;
+    display: inline-block;
+}
+
+.contact-section .btn-custom:hover {
+    background: transparent;
+    border-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 30px 15px;
+    }
+
+    .contact-section {
+        padding: 40px 15px;
+    }
+
+    .contact-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .contact-section p {
+        font-size: 1rem;
+    }
+
+    .contact-section .btn-custom {
+        padding: 10px 25px;
+    }
+}

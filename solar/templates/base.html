@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}
+    {% endblock %}
+    
+    <title>태양광 중개소</title>
+</head>
+<body>
+    <!-- 내비게이션 바 -->
+    {% include "navbar.html" %}
+
+    <!-- 기본 템플릿에 삽입할 내용 Start -->
+    {% block content %}
+    {% endblock %}
+    <!-- 기본 템플릿에 삽입할 내용 End -->
+
+    <!-- Core JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- Custom JS -->
+    {% block script %}
+    {% endblock %}
+
+    <!-- footer -->
+    {% include "footer.html" %}
+</body>
+</html>

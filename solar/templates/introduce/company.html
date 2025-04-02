@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <style>
+        /* 히어로 섹션 */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("{{ url_for('static', filename='imgs/solar_plant.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* 비전 섹션 */
+        .vision-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .vision-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .vision-content h2 {
+            color: #053807;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .vision-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* 사업 분야 섹션 */
+        .business-section {
+            padding: 80px 0;
+        }
+
+        .business-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .business-title h2 {
+            color: #053807;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .business-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .business-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .business-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .business-card i {
+            font-size: 3rem;
+            color: #0DAB33;
+            margin-bottom: 20px;
+        }
+
+        .business-card h3 {
+            color: #053807;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .business-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* 하단 CTA 섹션 */
+        .cta-section {
+            background: linear-gradient(45deg, #053807, #0DAB33);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #053807;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            color: #053807;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .vision-content h2,
+            .business-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 히어로 섹션 -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>일주지앤에스</h1>
+            <p>지속가능한 미래를 향해 나아가는 기업</p>
+        </div>
+    </div>
+
+    <!-- 비전 섹션 -->
+    <div class="vision-section">
+        <div class="vision-content">
+            <h2>Vision</h2>
+            <p><strong>일주지앤에스의 성장은 지속가능한 미래를 향해 나아갑니다.</strong></p>
+            <p>디지털 대전환 시대를 이끌어 갈 훌륭한 리더에게는 축적된 노하우와 전문성을 가진 또 다른 리더가 필요합니다. (주)일주지앤에스는 창조적 IT리더로서 사명감을 갖고, 기업의 비전을 정보기술로서 실현하겠습니다.</p>
+        </div>
+    </div>
+
+    <!-- 사업 분야 섹션 -->
+    <div class="business-section">
+        <div class="business-title">
+            <h2>Business</h2>
+            <p>정보 기술을 통한 새로운 가치를 창조를 목표로 하여 스마트 팩토리, 스마트 시티, 디지털 트윈, IoT 사업 등을 주축으로 고객과의 목표와 책임을 공유하며 최상의 기술력을 통하여 지속가능한 가치 창출을 만들어 나가고 있습니다.</p>
+        </div>
+        
+        <div class="business-grid">
+            <div class="business-card">
+                <i class="fas fa-solar-panel"></i>
+                <h3>에너지 IoT</h3>
+                <p>스마트 에너지 관리 시스템을 통한 효율적인 에너지 솔루션 제공</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-ship"></i>
+                <h3>조선해양 ICT</h3>
+                <p>최첨단 ICT 기술을 활용한 조선해양 산업의 디지털화</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-city"></i>
+                <h3>스마트시티</h3>
+                <p>도시 인프라의 디지털화를 통한 효율적인 도시 관리 시스템 구축</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-vr-cardboard"></i>
+                <h3>디지털 트윈</h3>
+                <p>가상 환경에서의 시뮬레이션을 통한 최적화된 솔루션 제공</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-industry"></i>
+                <h3>스마트팩토리</h3>
+                <p>생산성 향상을 위한 지능형 제조 시스템 구축</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-hard-hat"></i>
+                <h3>산업 안전보건</h3>
+                <p>작업자 안전을 위한 스마트 안전관리 시스템 구축</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>종합 디자인</h3>
+                <p>사용자 중심의 UI/UX 디자인 및 브랜드 아이덴티티 구축</p>
+            </div>
+            
+            <div class="business-card">
+                <i class="fas fa-brain"></i>
+                <h3>인공지능</h3>
+                <p>AI 기술을 활용한 지능형 솔루션 개발</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA 섹션 -->
+    <div class="cta-section">
+        <div class="cta-content">
+            <h2>함께 미래를 만들어가겠습니다</h2>
+            <p>일주지앤에스와 함께 지속가능한 미래를 만들어보세요</p>
+            <a href="https://www.i-gns.co.kr/#/" class="cta-button" target="_blank">회사 홈페이지 방문하기</a>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+{% endblock %}

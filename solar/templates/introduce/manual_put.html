@@ -1,0 +1,155 @@
+{% extends 'base.html' %} {% block head %}
+<style>
+    .solar-guide {
+        padding: 80px 0;
+    }
+
+    .guide-header {
+        text-align: center;
+        margin-bottom: 60px;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url("{{ url_for('static', filename='imgs/solar_plant.jpg') }}");
+        background-size: cover;
+        color: white;
+        padding: 100px 0;
+    }
+
+    .guide-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .guide-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .step {
+        background: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .step:hover {
+        transform: translateY(-5px);
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        background: #053807;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .document-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .document-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .document-card h4 {
+        color: #053807;
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %} {% block content %}
+<div class="guide-header">
+    <h1>태양광 발전소 판매 설명서</h1>
+    <p>
+        태양광 발전소를 성공적으로 판매하기 위한 절차 및 필요한 정보를
+        안내합니다.
+    </p>
+</div>
+
+<div class="container">
+    <div class="section">
+        <h2 class="text-center mb-5">판매 절차</h2>
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>판매 준비</h3>
+            <p>- 발전소 운영 현황 정리</p>
+            <p>- 발전량 및 수익성 분석</p>
+            <p>- 주요 서류 준비</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>매물 등록</h3>
+            <p>- 발전소 기본 정보 입력</p>
+            <p>- 서류 및 사진 등록</p>
+            <p>- 희망 판매가 설정</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>실사 및 검토</h3>
+            <p>- 전문가 검토 및 서류 확인</p>
+            <p>- 현장 실사 진행</p>
+            <p>- 투자 가치 평가</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">4</div>
+            <h3>매매 협의</h3>
+            <p>- 구매자와 협의</p>
+            <p>- 가격 조정 및 계약 조건 확정</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">5</div>
+            <h3>계약 체결 및 소유권 이전</h3>
+            <p>- 계약서 작성 및 서명</p>
+            <p>- 대금 지급 및 법적 이전 절차 진행</p>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background: #f8f9fa">
+    <div class="container">
+        <h2 class="text-center mb-5">필수 서류</h2>
+        <div class="document-grid">
+            <div class="document-card">
+                <h4>판매자 제출 서류</h4>
+                <ul>
+                    <li>사업자등록증</li>
+                    <li>발전사업허가증</li>
+                    <li>계통연계확인서</li>
+                    <li>준공확인서</li>
+                    <li>토지대장</li>
+                    <li>최근 1년 발전량 데이터</li>
+                </ul>
+            </div>
+            <div class="document-card">
+                <h4>구매자 제출 서류</h4>
+                <ul>
+                    <li>신분증 사본</li>
+                    <li>사업자등록증 (법인일 경우)</li>
+                    <li>자금출처 증빙서류</li>
+                    <li>기타 요청 서류</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

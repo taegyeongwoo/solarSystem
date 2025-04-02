@@ -1,0 +1,249 @@
+/* navigation */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    padding: 15px 20px;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0dab33 !important;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 500;
+    padding: 8px 15px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #0dab33;
+}
+
+.navbar .btn {
+    background-color: #0dab33;
+    color: #fff;
+}
+
+.navbar .btn:hover {
+    background-color: #0a8a28;
+}
+
+.header-banner {
+    position: relative;
+    height: 500px;
+    background-image: url("img/banner.jpg"); /* 배너 이미지 경로 */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-banner h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.header-banner p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.header-banner .btn {
+    background-color: #0dab33;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+.header-banner .btn:hover {
+    background-color: #0a8a28;
+}
+
+.custom-dots {
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+}
+
+.custom-dots img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0dab33;
+    color: white;
+    border-radius: 50%;
+    padding: 10px 15px;
+    font-size: 24px;
+    display: none;
+}
+
+.back-to-top:hover {
+    background-color: #0a8a28;
+}
+
+/* body */
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-tabs .nav-link {
+    color: #000; /* 기본 탭 색상 */
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #0dab33; /* 탭 하단 초록색 선 */
+    color: #0dab33; /* 탭 텍스트 색상 변경 */
+}
+
+.nav-tabs .nav-link.active {
+    border-color: #0dab33; /* 활성 탭 하단 초록색 선 */
+    color: #0dab33; /* 활성 탭 텍스트 색상 변경 */
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.product-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.product-image {
+    flex: 1;
+    max-width: 48%;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    max-width: 48%;
+}
+
+.product-info h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.summary-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-info table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.estimate {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #5cb85c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.state {
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+    }
+
+    .product-image,
+    .product-info {
+        max-width: 100%;
+    }
+
+    .product-info {
+        margin-top: 20px;
+    }
+}
+
+.attribute-title {
+    color: #0dab33;
+    text-align: center;
+}
+
+.attribute-name {
+    background-color: #e9ecef;
+    font-weight: bold;
+    /*text-align: center;*/
+}
+.attribute-value {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.table-title {
+    background-color: #e9ecef;
+}
+
+.table-value {
+    text-align: right;
+}

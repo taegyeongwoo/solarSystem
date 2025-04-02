@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    .platform-guide {
+        padding: 80px 0;
+    }
+    
+    .guide-header {
+        text-align: center;
+        margin-bottom: 60px;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("{{ url_for('static', filename='imgs/solar_plant.jpg') }}");
+        background-size: cover;
+        color: white;
+        padding: 100px 0;
+    }
+    
+    .guide-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .guide-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .process-section {
+        padding: 40px 0;
+    }
+    
+    .process-step {
+        background: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .process-step:hover {
+        transform: translateY(-5px);
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        background: #053807;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .feature-card {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #053807;
+        margin-bottom: 15px;
+    }
+    
+    .document-section {
+        background: #f8f9fa;
+        padding: 40px 0;
+    }
+    
+    .document-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .document-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .document-card h4 {
+        color: #053807;
+        margin-bottom: 15px;
+    }
+    
+    .faq-section {
+        padding: 40px 0;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: #e7f1e7;
+        color: #053807;
+    }
+    
+    .contact-section {
+        background: #053807;
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+    }
+    
+    .btn-custom {
+        background: #0DAB33;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+    
+    .btn-custom:hover {
+        background: #098c29;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- 안내 페이지 헤더 -->
+    <div class="guide-header">
+        <h1>발전소 거래 플랫폼 안내</h1>
+        <p>태양광 발전소의 투명하고 안전한 거래를 위한 SolarTec의 플랫폼 이용 가이드입니다.</p>
+    </div>
+
+    <!-- 플랫폼 특징 -->
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>안전한 거래</h3>
+                <p>검증된 발전소 정보와 전문가의 실사를 통한 신뢰할 수 있는 거래</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>투명한 정보</h3>
+                <p>발전소의 상세 정보와 수익성 분석 데이터 제공</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>빠른 매칭</h3>
+                <p>판매자와 구매자를 신속하게 연결하는 맞춤형 매칭 시스템</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 거래 프로세스 -->
+    <div class="process-section">
+        <div class="container">
+            <h2 class="text-center mb-5">거래 프로세스</h2>
+            
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>회원가입 및 인증</h3>
+                <p>- 기본 정보 입력 및 본인인증</p>
+                <p>- 사업자의 경우 사업자등록증 제출</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>매물 등록 (판매자)</h3>
+                <p>- 발전소 기본 정보 입력</p>
+                <p>- 사진 및 서류 등록</p>
+                <p>- 희망 매매가격 설정</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>매물 검토 및 실사</h3>
+                <p>- 전문가의 서류 검토</p>
+                <p>- 현장 실사 진행</p>
+                <p>- 수익성 분석 보고서 작성</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>매물 공개 및 구매자 매칭</h3>
+                <p>- 플랫폼에 매물 공개</p>
+                <p>- 관심 구매자 문의 접수</p>
+                <p>- 양측 상담 진행</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">5</div>
+                <h3>계약 체결</h3>
+                <p>- 양측 협의 후 가격 확정</p>
+                <p>- 계약서 작성 및 체결</p>
+                <p>- 대금 결제 및 소유권 이전</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 필요 서류 안내 -->
+    <div class="document-section">
+        <div class="container">
+            <h2 class="text-center mb-5">필요 서류 안내</h2>
+            <div class="document-grid">
+                <div class="document-card">
+                    <h4>판매자 제출 서류</h4>
+                    <ul>
+                        <li>사업자등록증</li>
+                        <li>발전사업허가증</li>
+                        <li>계통연계확인서</li>
+                        <li>준공확인서</li>
+                        <li>토지대장</li>
+                        <li>최근 1년 발전량 데이터</li>
+                    </ul>
+                </div>
+                <div class="document-card">
+                    <h4>구매자 제출 서류</h4>
+                    <ul>
+                        <li>신분증 사본</li>
+                        <li>사업자등록증 (법인의 경우)</li>
+                        <li>자금출처 증빙서류</li>
+                        <li>기타 요청 서류</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

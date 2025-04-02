@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of solar_plant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        .header p {
+            color: #888;
+            margin: 0;
+            font-size: 14px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .controls .left,
+        .controls .right {
+            display: flex;
+            align-items: center;
+        }
+        .controls select,
+        .controls button {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .product-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .product .badge.sale {
+            background-color: #e74c3c;
+        }
+        .product .badge.fast {
+            background-color: #f39c12;
+        }
+        .product h3 {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .product .price {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .product .stars {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+        .product button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .pagination .left {
+            display: flex;
+            align-items: center;
+        }
+        .pagination .left button {
+            padding: 10px 15px;
+            margin-right: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .pagination .left button.active {
+            background-color: #000;
+            color: #fff;
+        }
+        .pagination .right {
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* 필터링 */
+        .filter-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .filter-section label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+        .filter-section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .filter-section select,
+        .filter-section input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .filter-section input[type="color"] {
+            border: none;
+            padding: 0;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="filter-section">
+            <label>디자인</label>
+            <select>
+                <option>정사각형</option>
+            </select>
+            <select>
+                <option>밝게</option>
+            </select>
+            <input type="checkbox" id="imageRatio" checked><label for="imageRatio">이미지 비율</label>
+            <input type="checkbox" id="transparent" checked><label for="transparent">선명하게</label>
+            <select>
+                <option>Hover</option>
+            </select>
+            <select>
+                <option>4개</option>
+            </select>
+            <input type="number" value="10" min="0" max="100">px 상품 간격
+        </div>
+        <div class="filter-section">
+            <label>텍스트 정렬</label>
+            <select>
+                <option>왼쪽</option>
+            </select>
+            <input type="number" value="16" min="0" max="100">px
+            <input type="number" value="14" min="0" max="100">px 상품명
+            <input type="color" value="#000000">
+            <input type="number" value="14" min="0" max="100">px 판매가
+            <input type="checkbox" id="bold" checked><label for="bold">굵게</label>
+            <input type="color" value="#000000">
+            <input type="number" value="14" min="0" max="100">px 요약설명
+        </div>
+    </div>
+        </div>
+        <div class="controls">
+            <div class="left">
+                <button>Show Sidebar</button>
+                <select>
+                    <option>Default sorting</option>
+                </select>
+            </div>
+            <div class="right">
+                <p>SHOWING 1–12 OF 30 RESULTS</p>
+            </div>
+        </div>
+        <div class="product-grid">
+            <div class="product">
+                <div class="badge hot">판매중</div>
+                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <h3>WATER REPELLENT PARRA</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">ADD TO CART</div>
+                <button>ADD TO CART</button>
+            </div>
+            <div class="product">
+                <div class="badge fast">급매</div>
+                <img src="https://via.placeholder.com/150" alt="Product 2">
+                <h3>WATER REPELLENT PARRA</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">$229.5</div>
+                <button>ADD TO CART</button>
+            </div>
+            <div class="product">
+                <div class="badge sale">판매완료</div>
+                <img src="https://via.placeholder.com/150" alt="Product 3">
+                <h3>WATER REPELLENT PARRA</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">$229.5</div>
+                <button>ADD TO CART</button>
+            </div>
+        </div>
+        <div class="pagination">
+            <div class="left">
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="right">
+                <p>SHOWING 1–12 OF 30 RESULTS</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 필터링 Start -->
+</body>
+</html>
