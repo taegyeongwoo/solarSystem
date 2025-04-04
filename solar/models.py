@@ -1,4 +1,5 @@
 from solar import db
+from datetime import datetime
 
 question_voter = db.Table(
     'question_voter',
@@ -59,12 +60,24 @@ class Property(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     user = db.relationship('User', backref=db.backref('properties', lazy=True))
 
+    create_date = db.Column(db.DateTime(), nullable=False)  # 등록일시
+    status = db.Column(db.String(50), nullable=True)  # 상태 (심사전/심사중/심사완료)
+    status_result = db.Column(db.String(50), nullable=True)  # 심사 결과 (승인/거절)
+    modify_date = db.Column(db.DateTime(), nullable=True)  # 수정일시
+
     # 물건 정보
     property_id = db.Column(db.String(50), nullable=False)
+    plant_name = db.Column(db.String(100), nullable=True)  # 발전소명
+    address = db.Column(db.String(200), nullable=True)  # 주소
+    completion_date = db.Column(db.Date, nullable=True) # 준공일
+    desired_price = db.Column(db.Float, nullable=True)  # 판매 가격
+
     capacity_type = db.Column(db.String(50), nullable=False)  # 용량 구분
     current_status = db.Column(db.String(50), nullable=False)  # 현재 상태
     remaining_sections = db.Column(db.Integer, nullable=False)  # 잔존 구획수
     land_contract = db.Column(db.String(50), nullable=False)  # 토지 계약
+    average_generation = db.Column(db.Float, nullable=True) # 평균 발전량 (kWh)
+    notes = db.Column(db.Text, nullable=True)  # 비고
     
     # 발전/매매정보
     observation_point = db.Column(db.String(50), nullable=False)  # 관측지점
@@ -111,4 +124,9 @@ class Property(db.Model):
     
     # 가격에 포함된 내용
     included_in_price = db.Column(db.String(500))  # 가격에 포함된 내용 (다중 선택형)
+
+    # 서류
+    business_registration_certificate = db.Column(db.String(200), nullable=True) # 사업자 등록증
+    power_business_license = db.Column(db.String(200), nullable=True) # 발전 사업 허가증
+    grid_connection_contract = db.Column(db.String(200), nullable=True) # 계통 연계 계약서
 

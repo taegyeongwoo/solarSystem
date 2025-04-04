@@ -9,6 +9,7 @@ from solar.views.auth_views import login_required
 
 bp = Blueprint('announcement', __name__, url_prefix='/announcement')
 
+'''
 @bp.route('/list/')
 def _list():
     page = request.args.get('page', type=int, default=1)
@@ -26,7 +27,7 @@ def _list():
                     ).distinct()
     question_list = question_list.paginate(page=page, per_page=10)
     return render_template('announcement/announcement_list.html', question_list=question_list, page=page, kw=kw)
-
+'''
 @bp.route('/detail/<int:question_id>/')
 def detail(question_id) :
     form = AnswerForm()

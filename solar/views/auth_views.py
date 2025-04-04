@@ -1,6 +1,8 @@
-from flask import Blueprint, url_for, render_template, flash, request, session, g
+from flask import Blueprint, url_for, render_template, flash, request, session, g, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
+
+from functools import wraps
 
 from solar import db
 from solar.forms import UserCreateForm, UserLoginForm
@@ -26,6 +28,14 @@ def signup() :
             flash('이미 존재하는 사용자입니다.')
     return render_template('auth/signup.html', form=form)
 
+@bp.route('/auth/admin)dashboard')
+def admin_dashboard():
+    return render_template('auth/admin_dashboard.html')
+
+@bp.route('/auth/mypage')
+def mypage():
+    return render_template('auth/mypage.html')
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login() :
     form = UserLoginForm()
@@ -44,6 +54,8 @@ def login() :
             session.clear()
             # user.id : 데이터베이스에 저장되어 있는 사용자의 id
             session['user_id'] = user.id
+
+            ## 로그인 성공 시 사용자 유형에 따라 분기
             return redirect(url_for('main.index'))
         flash(error)
     return render_template('auth/login.html', form=form)

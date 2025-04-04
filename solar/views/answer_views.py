@@ -28,7 +28,7 @@ def create(question_id) :
 def modify(answer_id) :
     answer = Answer.query.get_or_404(answer_id)
     if g.user != answer.user :
-        flash('수저권한이 없습니다')
+        flash('수정 권한이 없습니다')
         return redirect(url_for('question.detail', question_id=answer.question.id))
     if request.method == "POST" :
         form = AnswerForm()
@@ -47,7 +47,7 @@ def delete(answer_id):
     answer = Answer.query.get_or_404(answer_id)
     question_id = answer.question.id
     if g.user != answer.user:
-        flash('삭제권한이 없습니다')
+        flash('삭제 권한이 없습니다')
     else:
         db.session.delete(answer)
         db.session.commit()

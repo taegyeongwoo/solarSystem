@@ -1,10 +1,203 @@
 {% extends 'base.html' %} {% block content %}
 <head>
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/plant_sale.css') }}"
-    />
-    <!--style.css-->
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .sale-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("{{ url_for('static', filename='imgs/solar_plant.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sale-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .sale-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #053807;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0dab33;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #0dab33;
+            box-shadow: 0 0 0 0.2rem rgba(13, 171, 51, 0.25);
+        }
+
+        .required-mark {
+            color: #dc3545;
+            margin-left: 3px;
+        }
+
+        .upload-box {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .upload-box:hover {
+            border-color: #0dab33;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: #0dab33;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #098c29;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* 체크리스트 스타일 */
+        .checklist {
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .checklist h4 {
+            color: #053807;
+            margin-bottom: 15px;
+        }
+
+        .checklist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0dab33;
+        }
+
+        /* 탭 스타일 (선택사항) */
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            color: #0dab33 !important;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-check label {
+            font-weight: normal;
+        }
+
+        .btn-submit {
+            background-color: #03c75a;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            color: #03c75a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            border-bottom: 2px solid black;
+            padding: 10px;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .sub_title {
+            font-size: large;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #053807;
+        }
+    </style>
 </head>
 
 <body>
@@ -324,233 +517,309 @@
                             </table>
                         </div>
                     </div>
-                    <br />
-                    <!-- 발전/매매 정보 -->
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="sub_title">발전/매매 정보</div>
+                    <!-- 기본 정보 섹션 -->
+                    <div class="form-section">
+                        <h3>사용자 정보</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >신청자명<span class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="applicant_name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >연락처<span class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        name="phone"
+                                        required
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>항목</th>
-                                        <th>내용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="see-point"
-                                                >관측지점</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                name="see-point"
-                                                id="see-point"
-                                                placeholder="관측지점"
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="power-peryear"
-                                                >연간발전량</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="power-peryear"
-                                                    id="power-peryear"
-                                                    placeholder="연간 발전량(KWh)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">kWh</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="sellout-price"
-                                                >매전단가</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="sellout-price"
-                                                    id="sellout-price"
-                                                    placeholder="매전단가(원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="sellout-price-per-year"
-                                                >매전수입/년년</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="sellout-price-per-year"
-                                                    id="sellout-price-per-year"
-                                                    placeholder="매전수입/년(원원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="remain-sellout-price"
-                                                >잔존 매전수입</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="remain-sellout-price"
-                                                    id="remain-sellout-price"
-                                                    placeholder="잔존 매전수입(원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="leak-price"
-                                                >누전수익</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="leak-price"
-                                                    id="leak-price"
-                                                    placeholder="누전수익익(원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >이메일<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                required
+                            />
                         </div>
                     </div>
-                    <br />
-                    <!-- 가격 정보 -->
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="sub_title">가격 정보</div>
+
+                    <!-- 발전소 정보 섹션 -->
+                    <div class="form-section">
+                        <h3>발전소 정보</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >발전소명<span class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="plant_name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >설비용량(kW)<span class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        name="capacity"
+                                        required
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>항목</th>
-                                        <th>내용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="land-price"
-                                                >토지 가격</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="land-price"
-                                                    id="land-price"
-                                                    placeholder="토지 가격(원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="system-price"
-                                                >시스템 가격</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="d-flex align-items-center"
-                                                style="gap: 8px"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    class="form-control"
-                                                    name="system-price"
-                                                    id="system-price"
-                                                    placeholder="시스템 가격(원)"
-                                                    style="max-width: 300px"
-                                                    required
-                                                />
-                                                <div class="per">원</div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >발전소 주소<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="address"
+                                required
+                            />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >준공일<span class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        name="completion_date"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >희망매매가(원)<span
+                                            class="required-mark"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        name="desired_price"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >용량 구분<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="capacity_type"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >현재 상태<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="current_status"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >잔존 구획수<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="remaining_sections"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >토지 계약<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="land_contract"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 발전/매매 정보 -->
+                    <div class="form-section">
+                        <h3>발전/매매 정보</h3>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >관측지점<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="observation_point"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >연간발전량<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="annual_production"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >매전단가<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="power_sale_price"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >매전수입/년<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="annual_revenue"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >잔존 매전수입<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="remaining_revenue"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >누전수익<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="accumulated_revenue"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 가격 정보 -->
+                    <div class="form-section">
+                        <h3>가격 정보</h3>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >토지 가격<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="land_price"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >시스템 가격<span class="required-mark"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                type="number"
+                                step="any"
+                                class="form-control"
+                                name="system_price"
+                                required
+                            />
                         </div>
                     </div>
                 </div>
@@ -562,167 +831,6 @@
                     role="tabpanel"
                     aria-labelledby="system-tab"
                 >
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="sub_title">물건 정보</div>
-                        </div>
-                        <div class="col-md-10">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>항목</th>
-                                        <th>내용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label
-                                                for="strage-kind"
-                                                class="required"
-                                                >용량 구분</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <select
-                                                class="form-control"
-                                                id="strage-kind"
-                                            >
-                                                <option>
-                                                    태양광의 용량을 선택해
-                                                    주세요.
-                                                </option>
-                                                <option>용량 1</option>
-                                                <option>용량 2</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="state" class="required"
-                                                >현재 상태</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type1"
-                                                    value="construction-before"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type1"
-                                                    >공사전</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type2"
-                                                    value="construction-ing"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type2"
-                                                    >공사중</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type3"
-                                                    value="construction-after"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type3"
-                                                    >완공</label
-                                                >
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>잔존 구획 수</td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="total-sections"
-                                                placeholder="총 구획"
-                                            />
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="remaining-sections"
-                                                placeholder="잔여 구획"
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label
-                                                for="contract"
-                                                class="required"
-                                                >토지 계약</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="contract-type"
-                                                    id="contract-type1"
-                                                    value="contract-temporary"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="contract-type1"
-                                                    >임대</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="contract-type"
-                                                    id="contract-type2"
-                                                    value="contract-permanent"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="contract-type2"
-                                                    >매매</label
-                                                >
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <div class="form-section">
                         <h3>모듈 정보</h3>
                         <div class="form-group">

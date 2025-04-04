@@ -1,0 +1,196 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.sale-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("{{ url_for('static', filename='imgs/solar_plant.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sale-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.sale-form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto 50px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h3 {
+    color: #053807;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0dab33;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: #0dab33;
+    box-shadow: 0 0 0 0.2rem rgba(13, 171, 51, 0.25);
+}
+
+.upload-box {
+    border: 2px dashed #ddd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.upload-box:hover {
+    border-color: #0dab33;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background: #0dab33;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background: #098c29;
+}
+
+.info-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 체크리스트 스타일 */
+.checklist {
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.checklist h4 {
+    color: #053807;
+    margin-bottom: 15px;
+}
+
+.checklist ul {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.checklist li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #0dab33;
+}
+
+/* 탭 스타일 (선택사항) */
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #0dab33 !important;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-check label {
+    font-weight: normal;
+}
+
+.btn-submit {
+    background-color: #03c75a;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #03c75a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: 2px solid black;
+    padding: 10px;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.required::after {
+    content: " *";
+    color: red;
+}
+.sub_title {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #053807;
+}
+
+.per {
+    line-height: 1;
+    vertical-align: middle;
+}

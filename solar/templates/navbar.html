@@ -24,7 +24,7 @@
         >
             <ul class="navbar-nav" style="margin-left: 20%">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">홈</a>
+                    <a class="nav-link" href="main.index">홈</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -75,7 +75,7 @@
                         >
                         <a
                             class="dropdown-item"
-                            href="{{ url_for('main.announcement') }}"
+                            href="{{ url_for('put.property_list') }}"
                             >판매 공고</a
                         >
                     </div>
@@ -100,10 +100,26 @@
         >
             {% if g.user %}
             <ul class="navbar-nav">
+                <!-- 마이페이지 또는 관리자페이지 링크 -->
                 <li class="nav-item">
-                    <a href="{{ url_for('auth.logout') }}" class="nav-link"
-                        >{{ g.user.username }} (로그아웃)</a
+                    <a
+                        class="nav-link"
+                        href="{% if g.user.username == 'admin' %}
+                         {{ url_for('auth.admin_dashboard') }}
+                     {% else %}
+                         {{ url_for('auth.mypage') }}
+                     {% endif %}"
                     >
+                        {% if g.user.username == 'admin' %}관리자페이지{% else
+                        %}마이페이지{% endif %}
+                    </a>
+                </li>
+
+                <!-- 로그아웃 링크 -->
+                <li class="nav-item">
+                    <a href="{{ url_for('auth.logout') }}" class="nav-link">
+                        {{ g.user.username }} (로그아웃)
+                    </a>
                 </li>
             </ul>
             {% else %}
