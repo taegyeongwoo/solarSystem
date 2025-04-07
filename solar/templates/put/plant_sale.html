@@ -163,6 +163,7 @@
                         </div>
                     </div>
                     <br />
+                    <!--물건 정보-->
                     <div class="row">
                         <div class="col-md-2">
                             <div class="sub_title">물건 정보</div>
@@ -562,244 +563,57 @@
                     role="tabpanel"
                     aria-labelledby="system-tab"
                 >
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="sub_title">물건 정보</div>
-                        </div>
-                        <div class="col-md-10">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>항목</th>
-                                        <th>내용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label
-                                                for="strage-kind"
-                                                class="required"
-                                                >용량 구분</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <select
-                                                class="form-control"
-                                                id="strage-kind"
-                                            >
-                                                <option>
-                                                    태양광의 용량을 선택해
-                                                    주세요.
-                                                </option>
-                                                <option>용량 1</option>
-                                                <option>용량 2</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="state" class="required"
-                                                >현재 상태</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type1"
-                                                    value="construction-before"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type1"
-                                                    >공사전</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type2"
-                                                    value="construction-ing"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type2"
-                                                    >공사중</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="construction-type"
-                                                    id="construction-type3"
-                                                    value="construction-after"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="construction-type3"
-                                                    >완공</label
-                                                >
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>잔존 구획 수</td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="total-sections"
-                                                placeholder="총 구획"
-                                            />
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="remaining-sections"
-                                                placeholder="잔여 구획"
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label
-                                                for="contract"
-                                                class="required"
-                                                >토지 계약</label
-                                            >
-                                        </td>
-                                        <td>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="contract-type"
-                                                    id="contract-type1"
-                                                    value="contract-temporary"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="contract-type1"
-                                                    >임대</label
-                                                >
-                                            </div>
-                                            <div
-                                                class="form-check form-check-inline"
-                                            >
-                                                <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="contract-type"
-                                                    id="contract-type2"
-                                                    value="contract-permanent"
-                                                    required
-                                                />
-                                                <label
-                                                    class="form-check-label"
-                                                    for="contract-type2"
-                                                    >매매</label
-                                                >
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="sub_title">모듈 정보</div>
                     </div>
-                    <div class="form-section">
-                        <h3>모듈 정보</h3>
-                        <div class="form-group">
-                            <label class="form-label">제조사</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="manufacturer"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">시스템 용량</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="system_capacity"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">형식</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="model_type"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">최대출력</label>
-                            <input
-                                type="number"
-                                step="any"
-                                class="form-control"
-                                name="max_output"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">변환효율</label>
-                            <input
-                                type="number"
-                                step="any"
-                                class="form-control"
-                                name="conversion_efficiency"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">출력보증(년)</label>
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="output_warranty"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">제품보증(년)</label>
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="product_warranty"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">감시시스템(유/무)</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="monitoring_system"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">서비스 비용</label>
-                            <input
-                                type="number"
-                                step="any"
-                                class="form-control"
-                                name="service_cost"
-                            />
-                        </div>
+                    <div class="col-md-10">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>내용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label for="manufacturer" class="required">제조사</label></td>
+                                    <td><input type="text" class="form-control" name="manufacturer" id="manufacturer" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="system_capacity" class="required">시스템 용량</label></td>
+                                    <td><input type="text" class="form-control" name="system_capacity" id="system_capacity" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="model_type">형식</label></td>
+                                    <td><input type="text" class="form-control" name="model_type" id="model_type" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="max_output">최대출력</label></td>
+                                    <td><input type="number" step="any" class="form-control" name="max_output" id="max_output" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="conversion_efficiency">변환효율</label></td>
+                                    <td><input type="number" step="any" class="form-control" name="conversion_efficiency" id="conversion_efficiency" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="output_warranty">출력보증(년)</label></td>
+                                    <td><input type="number" class="form-control" name="output_warranty" id="output_warranty" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="product_warranty">제품보증(년)</label></td>
+                                    <td><input type="number" class="form-control" name="product_warranty" id="product_warranty" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="monitoring_system">감시시스템(유/무)</label></td>
+                                    <td><input type="text" class="form-control" name="monitoring_system" id="monitoring_system" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="service_cost">서비스 비용</label></td>
+                                    <td><input type="number" step="any" class="form-control" name="service_cost" id="service_cost" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="form-section">
@@ -1066,11 +880,60 @@
                 <!-- 개인정보 동의 탭 끝 -->
             </div>
             <!-- tab-content 끝 -->
+            <!-- 탭 네비게이션 버튼 -->
+            <div class="tab-navigation mt-4 text-center">
+                <button type="button" class="btn btn-secondary" id="prevBtn">이전</button>
+                <button type="button" class="btn btn-primary" id="nextBtn">다음</button>
+                <button type="submit" class="btn btn-success d-none" id="submitBtn">
+                    신청하기
+                </button>
+            </div>
         </form>
         <!-- /폼 -->
     </div>
 
     <!-- Bootstrap 및 jQuery -->
+    <script>
+        const tabs = Array.from(document.querySelectorAll('.nav-link'));
+        const tabContents = Array.from(document.querySelectorAll('.tab-pane'));
+        let currentIndex = 0;
+    
+        const updateTab = (index) => {
+            // 탭 버튼 상태 업데이트
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+    
+            // 탭 컨텐츠 활성화
+            tabContents.forEach((content, i) => {
+                content.classList.toggle('show', i === index);
+                content.classList.toggle('active', i === index);
+            });
+    
+            // 버튼 상태 변경
+            document.getElementById('prevBtn').style.display = index === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = index === tabs.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').classList.toggle('d-none', index !== tabs.length - 1);
+        };
+    
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateTab(currentIndex);
+            }
+        });
+    
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentIndex < tabs.length - 1) {
+                currentIndex++;
+                updateTab(currentIndex);
+            }
+        });
+    
+        // 초기 설정
+        updateTab(currentIndex);
+    </script>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

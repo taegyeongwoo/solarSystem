@@ -49,5 +49,7 @@ def create_app() :
     # 필터
     from .filter import format_datetime
     app.jinja_env.filters['datetime'] = format_datetime
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
 
     return app

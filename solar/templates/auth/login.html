@@ -44,7 +44,7 @@
         </div>
         <div class="login-switcher-signup" ng-hide="showSignIn">
             <h3>Don't have an account?</h3>
-            <button ng-click="showSignIn=true">Sign Up</button>
+            <a class="btn" href="{{ url_for('auth.login') }}" ng-click="showSignIn=true">Sign Up</a>
         </div>
     </div>
 </div>

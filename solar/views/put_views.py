@@ -14,7 +14,7 @@ bp = Blueprint('put', __name__, url_prefix='/')
 # 발전소 판매 신청 폼 페이지
 @bp.route('/put/plant-sale/')
 def plant_sale():
-    return render_template('put/plant_sale.html')
+    return render_template('/put/plant_sale.html')
 
 
 # 문자열을 안전하게 float으로 변환하는 함수
