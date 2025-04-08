@@ -34,7 +34,10 @@ def admin_dashboard():
 
 @bp.route('/auth/mypage')
 def mypage():
-    return render_template('auth/mypage.html')
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    return render_template('auth/mypage.html', user=user)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login() :
