@@ -28,13 +28,16 @@ def signup() :
             flash('이미 존재하는 사용자입니다.')
     return render_template('auth/signup.html', form=form)
 
-@bp.route('/auth/admin)dashboard')
+@bp.route('/auth/admin/dashboard')
 def admin_dashboard():
     return render_template('auth/admin_dashboard.html')
 
 @bp.route('/auth/mypage')
 def mypage():
-    return render_template('auth/mypage.html')
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    return render_template('auth/mypage.html', user=user)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login() :
