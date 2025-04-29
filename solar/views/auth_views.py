@@ -6,7 +6,7 @@ from functools import wraps
 
 from solar import db
 from solar.forms import UserCreateForm, UserLoginForm
-from solar.models import User
+from solar.models import User, Property
 
 import functools
 
@@ -37,8 +37,15 @@ def mypage():
     user_id = session.get('user_id')
     user = User.query.get(user_id)
 
-    return render_template('auth/mypage.html', user=user)
-
+    # 최근 3개의 거래 내역 (예: 모든 거래 상태 포함)
+    latest_properties = (
+        Property.query
+        .filter_by(user_id=user_id)
+        .order_by(Property.create_date.desc())
+        .limit(3)
+        .all()
+    )
+    return render_template('auth/mypage.html', user=user, latest_properties=latest_properties)
 @bp.route('/login', methods=['GET', 'POST'])
 def login() :
     form = UserLoginForm()

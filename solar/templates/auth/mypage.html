@@ -207,62 +207,29 @@
         <div id="panel2" class="menu-panel">
             <h2>거래 내역</h2>
             <div class="info-section">
-                <h3>거래 내역</h3>
-                <div class="trade">
-                    <table>
-                        <thead>
-                          <tr>
-                            <th>거래 번호</th>
-                            <th>발전소명</th>
-                            <th>거래 상태</th>
-                            <th>계약일</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#0001</td>
-                            <td>태양광 A 발전소</td>
-                            <td>진행중</td>
-                            <td>2023-07-10</td>
-                          </tr>
-                          <tr>
-                            <td>#0002</td>
-                            <td>태양광 B 발전소</td>
-                            <td>완료</td>
-                            <td>2023-06-22</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
-            <div class="info-section">
                 <div class="sale">
                     <h3>판매 내역</h3>
                     <table>
-                        <thead>
-                          <tr>
-                            <th>거래 번호</th>
-                            <th>발전소명</th>
-                            <th>거래 상태</th>
-                            <th>계약일</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#0001</td>
-                            <td>태양광 A 발전소</td>
-                            <td>진행중</td>
-                            <td>2023-07-10</td>
-                          </tr>
-                          <tr>
-                            <td>#0002</td>
-                            <td>태양광 B 발전소</td>
-                            <td>완료</td>
-                            <td>2023-06-22</td>
-                          </tr>
-                        </tbody>
+                      <thead>
+                        <tr>
+                          <th>거래 번호</th>
+                          <th>발전소명</th>
+                          <th>거래 상태</th>
+                          <th>계약일</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for p in latest_properties %}
+                        <tr>
+                          <td>{{ p.id }}</td>
+                          <td>{{ p.plant_name }}</td>
+                          <td>{{ p.status or "미정" }}</td>
+                          <td>{{ p.completion_date.strftime('%Y-%m-%d') if p.completion_date else '미입력' }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
                       </table>
-                    <a href="#" class="btn">정보 수정</a>
+                    <a href="#" class="btn">더보기</a>
                 </div>
             </div>
             <div class="info-section">
@@ -292,6 +259,7 @@
                           </tr>
                         </tbody>
                       </table>
+                      <a href="#" class="btn">더보기</a>
                 </div>
             </div>
         </div>
