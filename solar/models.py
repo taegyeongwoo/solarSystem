@@ -124,3 +124,12 @@ class Property(db.Model):
     business_registration_certificate = db.Column(db.String(200), nullable=True)  # 사업자등록증
     power_business_license = db.Column(db.String(200), nullable=True)  # 발전사업 허가증
     grid_connection_contract = db.Column(db.String(200), nullable=True)  # 계통연계 계약서
+
+class PropertyLike(db.Model):
+    __tablename__ = 'property_like'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    property_id = db.Column(db.Integer, db.ForeignKey('property.id', ondelete="CASCADE"))
+
+    user = db.relationship('User', backref='liked_properties')
+    property = db.relationship('Property', backref='liked_by_users')

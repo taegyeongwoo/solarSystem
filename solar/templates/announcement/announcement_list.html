@@ -3,6 +3,7 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='css/announcement_list.css') }}"
 />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {% endblock %} {% block content %}
 <div class="container my-3">
     <!-- Header Section Start -->
@@ -78,40 +79,54 @@
 
     <!-- Product Grid Start -->
     <div class="product-grid">
-        {% if property_list %} {% for property in property_list.items %}
-        <div class="product">
-            <!-- 배지: 추천이 있을 경우 배지 표시 -->
-            {% if property.voter|length > 0 %}
-            <div class="badge hot">추천 {{ property.voter|length }}</div>
-            {% endif %}
-
-            <!-- 이미지: 기본 이미지 사용 -->
-            <img src="https://via.placeholder.com/300" alt="Solar Panel" />
-
-            <!-- 질문 제목 -->
-            <h3>
-                <a href="{{ url_for('put.detail', property_id=property.id) }}"
-                    >{{ property.property_id }}</a
-                >
-            </h3>
-
-            <!-- 판매 상태 -->
-            <div class="badge sale">{{ property.current_status }}</div>
-
-            <!-- 작성자 이름 -->
-            <div class="author">작성자: {{ property.user.username }}</div>
-
-            <!-- 작성일시 -->
-            <div class="date">
-                작성일시: {{ property.create_date|datetime }}
+        {% if property_list %}
+            {% for property in property_list.items %}
+            <div class="product">
+                <!-- 책갈피 아이콘 (찜 여부에 따라 표시) -->
+                <div class="bookmark-icon" style="text-align: right;">
+                    {% if property.id in liked_property_ids %}
+                        <!-- 찜된 상태: solid bookmark -->
+                        <a href="{{ url_for('put.unlike', property_id=property.id) }}" title="찜 해제">
+                            <i class="fas fa-bookmark text-success fa-lg"></i>
+                        </a>
+                    {% else %}
+                        <!-- 찜하지 않은 상태: outline bookmark -->
+                        <a href="{{ url_for('put.like', property_id=property.id) }}" title="찜하기">
+                            <i class="far fa-bookmark text-secondary fa-lg"></i>
+                        </a>
+                    {% endif %}
+                </div>
+    
+                <!-- 이미지 -->
+                <img src="{% if property.business_registration_certificate %}
+                    {{ url_for('static', filename='saved/' ~ property.business_registration_certificate) }}
+                {% else %}
+                    https://via.placeholder.com/300
+                {% endif %}" alt="Solar Plant Image" />
+    
+                <!-- 매물 제목 -->
+                <h3>
+                    <a href="{{ url_for('put.detail', property_id=property.id) }}">
+                        {{ property.plant_name }}
+                    </a>
+                </h3>
+    
+                <!-- 판매 상태 -->
+                <div class="badge sale">{{ property.current_status }}</div>
+    
+                <!-- 작성자 -->
+                <div class="author">작성자: {{ property.user.username }}</div>
+    
+                <!-- 작성일시 -->
+                <div class="date">작성일시: {{ property.create_date|datetime }}</div>
             </div>
-        </div>
-        {% endfor %} {% else %}
-        <div class="product">
-            <div class="badge">No Questions</div>
-            <img src="https://via.placeholder.com/300" alt="No Questions" />
-            <h3>등록된 매물이 없습니다.</h3>
-        </div>
+            {% endfor %}
+        {% else %}
+            <div class="product">
+                <div class="badge">등록된 매물이 없습니다.</div>
+                <img src="https://via.placeholder.com/300" alt="No Properties" />
+                <h3>등록된 매물이 없습니다.</h3>
+            </div>
         {% endif %}
     </div>
     <!-- Product Grid End -->

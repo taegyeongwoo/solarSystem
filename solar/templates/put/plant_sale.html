@@ -85,6 +85,7 @@
             method="POST"
             enctype="multipart/form-data"
             class="sale-form"
+            novalidate
         >
             <div class="tab-content" id="formTabContent">
                 <!-- (1) 기본 정보 탭 -->
@@ -209,9 +210,11 @@
                                             <select
                                                 class="form-control"
                                                 id="location"
+                                                name="location"
                                                 onchange="updateSubArea()"
+                                                required
                                             >
-                                                <option value="">
+                                                <option value="" disabled selected>
                                                     광역시 선택
                                                 </option>
                                             </select>
@@ -219,8 +222,10 @@
                                             <select
                                                 class="form-control"
                                                 id="subLocation"
+                                                name="sub_location"
+                                                required
                                             >
-                                                <option value="">
+                                                <option value="" disabled selected>
                                                     시/군/구를 선택해주세요
                                                 </option>
                                             </select>
@@ -780,7 +785,6 @@
                                                     id="output_warranty"
                                                     placeholder="출력보증(년)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">년</div>
                                             </div>
@@ -805,7 +809,6 @@
                                                     id="module_product_warranty"
                                                     placeholder="제품보증(년)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">년</div>
                                             </div>
@@ -827,7 +830,6 @@
                                                     name="module_monitoring_system"
                                                     id="module_monitoring_system1"
                                                     value="module_monitoring_system-yes"
-                                                    required
                                                 />
                                                 <label
                                                     class="form-check-label"
@@ -844,7 +846,6 @@
                                                     name="module_monitoring_system"
                                                     id="module_monitoring_system2"
                                                     value="module_monitoring_system-no"
-                                                    required
                                                 />
                                                 <label
                                                     class="form-check-label"
@@ -873,7 +874,6 @@
                                                     id="service_cost"
                                                     placeholder="서비스 비용(원)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">원</div>
                                             </div>
@@ -982,7 +982,6 @@
                                                     id="inverter_product_warranty"
                                                     placeholder="제품보증(년)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">년</div>
                                             </div>
@@ -1005,7 +1004,6 @@
                                                     name="inverter_monitoring_system"
                                                     id="inverter_monitoring_system1"
                                                     value="inverter_monitoring_system-yes"
-                                                    required
                                                 />
                                                 <label
                                                     class="form-check-label"
@@ -1022,7 +1020,6 @@
                                                     name="inverter_monitoring_system"
                                                     id="inverter_monitoring_system2"
                                                     value="inverter_monitoring_system-no"
-                                                    required
                                                 />
                                                 <label
                                                     class="form-check-label"
@@ -1051,7 +1048,6 @@
                                                     id="inverter_service_cost"
                                                     placeholder="서비스 비용(원)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">원</div>
                                             </div>
@@ -1150,7 +1146,6 @@
                                                     id="structure_product_warranty"
                                                     placeholder="제품보증(년)"
                                                     style="max-width: 300px"
-                                                    required
                                                 />
                                                 <div class="per">년</div>
                                             </div>
@@ -1278,20 +1273,18 @@
                         </div>
                     </div>
 
-                    <form
-                        action="{{ url_for('put.submit_sale') }}"
-                        method="POST"
-                        enctype="multipart/form-data"
-                    >
-                        <!-- 폼 필드들 -->
-                        <button type="submit" class="btn btn-submit">
-                            판매 신청하기
-                        </button>
-                    </form>
+
+                    <!-- 폼 필드들 -->
+                    <button type="submit" class="btn btn-submit">
+                        판매 신청하기
+                    </button>
+
                 </div>
                 <!-- 개인정보 동의 탭 끝 -->
             </div>
-            <!-- tab-content 끝 -->
+        </form>
+        <!-- /폼 -->
+         <!-- tab-content 끝 -->
             <!-- 탭 네비게이션 버튼 -->
             <div class="tab-navigation mt-4 text-center">
                 <button type="button" class="btn btn-secondary" id="prevBtn">
@@ -1308,8 +1301,6 @@
                     신청하기
                 </button>
             </div>
-        </form>
-        <!-- /폼 -->
     </div>
 
     <!-- Bootstrap 및 jQuery -->
@@ -1692,6 +1683,75 @@
                 });
             }
         }
+    </script>
+
+<!--panel2에서 유지-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabItems = document.querySelectorAll('.menu-item');
+      const tabPanels = document.querySelectorAll('.menu-panel');
+    
+      // URL 쿼리에서 ?tab=panel2 읽기
+      const params = new URLSearchParams(window.location.search);
+      const selectedTab = params.get('tab');
+    
+      if (selectedTab) {
+        tabItems.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.target === selectedTab) btn.classList.add('active');
+        });
+    
+        tabPanels.forEach(panel => {
+          panel.classList.remove('active');
+          if (panel.id === selectedTab) panel.classList.add('active');
+        });
+      }
+    
+      // 기존 탭 클릭 이벤트 유지
+      tabItems.forEach(item => {
+        item.addEventListener('click', function () {
+          tabItems.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+    
+          tabPanels.forEach(panel => panel.classList.remove('active'));
+    
+          const targetId = this.getAttribute('data-target');
+          const targetPanel = document.getElementById(targetId);
+          if (targetPanel) {
+            targetPanel.classList.add('active');
+          }
+        });
+      });
+    });
+    </script>
+
+    <!--필수 입력 정보 alert-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        if (!form) {
+            console.warn("⚠️ form 요소를 찾을 수 없습니다.");
+            return;
+        }
+
+        form.addEventListener("submit", function (e) {
+            const invalidInputs = [...form.querySelectorAll(":invalid")];
+
+            const unfocusable = invalidInputs.filter(input => {
+            const style = window.getComputedStyle(input);
+            return style.display === "none" || input.offsetParent === null;
+            });
+
+            if (unfocusable.length > 0) {
+            e.preventDefault();
+
+            alert("다음 필수 항목이 숨겨져 있습니다:\n\n" + unfocusable.map(i => i.name).join(", "));
+
+            console.warn("숨겨진 required 필드:", unfocusable.map(i => i.name));
+            }
+        });
+        });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

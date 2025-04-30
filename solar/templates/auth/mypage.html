@@ -160,12 +160,6 @@
 <body>
   <!-- 헤더 -->
   <div class="header">
-    <div class="site-logo">My SolarTec</div>
-    <div class="user-menu">
-      <a href="#">알림</a>
-      <a href="#">메시지</a>
-      <a href="#">로그아웃</a>
-    </div>
   </div>
 
   <!-- 컨테이너: 사이드바 + 메인영역 -->
@@ -174,7 +168,6 @@
     <div class="sidebar">
       <!-- 프로필 박스 -->
       <div class="profile-box">
-        <img src="https://via.placeholder.com/80" alt="Profile" />
         <div class="nickname">홍길동</div>
         <!-- 예시로, 회원 등급 or 포인트 -->
         <div style="font-size: 13px;">골드회원</div>
@@ -264,104 +257,83 @@
             </div>
         </div>
         <div id="panel3" class="menu-panel">
-            <h2>관심 목록</h2>
-            <div class="info-section">
-                <h3>관심 목록</h3>
-                <div class="like">
-                    <table>
-                        <thead>
+          <h2>관심 매물</h2>
+          <div class="info-section">
+              <h3>내가 찜한 매물</h3>
+              <div class="like">
+                  <table>
+                      <thead>
                           <tr>
-                            <th>거래 번호</th>
-                            <th>발전소명</th>
-                            <th>거래 상태</th>
-                            <th>계약일</th>
+                              <th>번호</th>
+                              <th>발전소명</th>
+                              <th>판매상태</th>
+                              <th>등록일</th>
                           </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#0001</td>
-                            <td>태양광 A 발전소</td>
-                            <td>진행중</td>
-                            <td>2023-07-10</td>
-                          </tr>
-                          <tr>
-                            <td>#0002</td>
-                            <td>태양광 B 발전소</td>
-                            <td>완료</td>
-                            <td>2023-06-22</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    <a href="#" class="btn">더보기</a>
-                </div>
-            </div>
-        </div>
-        <div id="panel3" class="menu-panel">
-            <h2>관심 목록</h2>
-            <div class="info-section">
-                <h3>관심 목록</h3>
-                <div class="like">
-                    <table>
-                        <thead>
-                          <tr>
-                            <th>거래 번호</th>
-                            <th>발전소명</th>
-                            <th>거래 상태</th>
-                            <th>계약일</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#0001</td>
-                            <td>태양광 A 발전소</td>
-                            <td>진행중</td>
-                            <td>2023-07-10</td>
-                          </tr>
-                          <tr>
-                            <td>#0002</td>
-                            <td>태양광 B 발전소</td>
-                            <td>완료</td>
-                            <td>2023-06-22</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    <a href="#" class="btn">더보기</a>
-                </div>
-            </div>
-        </div>
+                      </thead>
+                      <tbody>
+                          {% if liked_properties and liked_properties|length > 0 %}
+                              {% for property in liked_properties %}
+                              <tr>
+                                  <td class="text-center">{{ loop.index }}</td>
+                                  <td class="text-left">{{ property.plant_name }}</td>
+                                  <td class="text-center">{{ property.current_status }}</td>
+                                  <td class="text-center">{{ property.create_date|datetime }}</td>
+                              </tr>
+                              {% endfor %}
+                          {% else %}
+                              <tr>
+                                  <td colspan="4" class="text-center">찜한 매물이 없습니다.</td>
+                              </tr>
+                          {% endif %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
         <div id="panel4" class="menu-panel">
-            <h2>문의 내역</h2>
-            <div class="info-section">
-                <h3>문의 내역</h3>
-                <div class="like">
-                    <table>
-                        <thead>
+          <h2>문의 내역</h2>
+          <div class="info-section">
+              <h3>내가 남긴 문의</h3>
+              <div class="like">
+                  <table>
+                      <thead>
                           <tr>
-                            <th>거래 번호</th>
-                            <th>발전소명</th>
-                            <th>거래 상태</th>
-                            <th>계약일</th>
+                              <th>번호</th>
+                              <th>제목</th>
+                              <th>답변 수</th>
+                              <th>작성일</th>
                           </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#0001</td>
-                            <td>태양광 A 발전소</td>
-                            <td>진행중</td>
-                            <td>2023-07-10</td>
-                          </tr>
-                          <tr>
-                            <td>#0002</td>
-                            <td>태양광 B 발전소</td>
-                            <td>완료</td>
-                            <td>2023-06-22</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    <a href="#" class="btn">더보기</a>
-                </div>
-            </div>
-        </div>
+                      </thead>
+                      <tbody>
+                          {% if question_list and question_list.items|length > 0 %}
+                              {% for question in question_list.items %}
+                              <tr>
+                                  <td class="text-center">
+                                      {{ question_list.total - ((question_list.page - 1) * question_list.per_page) - loop.index0 }}
+                                  </td>
+                                  <td class="text-left">
+                                      <a href="{{ url_for('question.detail', question_id=question.id) }}">
+                                          {{ question.subject }}
+                                      </a>
+                                  </td>
+                                  <td class="text-center">
+                                      {{ question.answer_set|length }}
+                                  </td>
+                                  <td class="text-center">
+                                      {{ question.create_date|datetime }}
+                                  </td>
+                              </tr>
+                              {% endfor %}
+                          {% else %}
+                              <tr>
+                                  <td colspan="4" class="text-center">문의 내역이 없습니다.</td>
+                              </tr>
+                          {% endif %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
     </div>
   </div>
 

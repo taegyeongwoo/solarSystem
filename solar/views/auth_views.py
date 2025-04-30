@@ -6,7 +6,7 @@ from functools import wraps
 
 from solar import db
 from solar.forms import UserCreateForm, UserLoginForm
-from solar.models import User, Property
+from solar.models import User, Property, Question, PropertyLike
 
 import functools
 
@@ -45,7 +45,22 @@ def mypage():
         .limit(3)
         .all()
     )
-    return render_template('auth/mypage.html', user=user, latest_properties=latest_properties)
+
+    question_list = Question.query.filter_by(user_id=user_id) \
+                                  .order_by(Question.create_date.desc()) \
+                                  .paginate(page=request.args.get('page', 1, type=int), per_page=5)
+    
+    liked_properties = []
+
+    if g.user:
+        liked_properties = Property.query \
+            .join(PropertyLike, Property.id == PropertyLike.property_id) \
+            .filter(PropertyLike.user_id == g.user.id) \
+            .order_by(Property.create_date.desc()) \
+            .all()
+    
+    return render_template('auth/mypage.html', user=user, question_list=question_list, latest_properties=latest_properties, liked_properties=liked_properties)
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login() :
     form = UserLoginForm()

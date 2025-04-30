@@ -4,7 +4,7 @@ from datetime import datetime
 import uuid
 
 from .. import db
-from solar.models import Property, User
+from solar.models import Property, User, PropertyLike
 from solar.forms import PropertyForm
 from solar.views.auth_views import login_required
 import sys, os
@@ -30,31 +30,6 @@ def to_int(val):
     except ValueError :
         return None
 
-# 저장 경로
-def save_file(file_field_name, subfolder):
-    
-    from flask import current_app
-    BASE_UPLOAD_PATH = os.path.join(current_app.root_path, 'static', 'saved')
-
-    file = request.files.get(file_field_name)
-    if file and file.filename:
-        original_filename = secure_filename(file.filename)
-        upload_dir = os.path.join(BASE_UPLOAD_PATH, subfolder)
-        os.makedirs(upload_dir, exist_ok=True)
-
-        # 중복 방지: 같은 이름이 있으면 UUID 붙이기
-        save_path = os.path.join(upload_dir, original_filename)
-        if os.path.exists(save_path):
-            name, ext = os.path.splitext(original_filename)
-            new_filename = f"{name}_{uuid.uuid4().hex[:8]}{ext}"
-            save_path = os.path.join(upload_dir, new_filename)
-        else:
-            new_filename = original_filename
-
-        file.save(save_path)
-        return new_filename
-    return None
-
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
 def allowed_file(filename):
     return '.' in filename and \
@@ -71,19 +46,26 @@ def submit_sale():
     included_in_price = ', '.join(included_items) if included_items else None
 
     # 파일 업로드 함수
-    def save_uploaded_file(field_name):
+    def save_uploaded_file(field_name, sub_dir):
         file = request.files.get(field_name)
         if file and allowed_file(file.filename):
             filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
-            save_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            upload_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], sub_dir)
+
+            # 해당 하위 폴더가 없으면 생성
+            os.makedirs(upload_folder, exist_ok=True)
+
+            save_path = os.path.join(upload_folder, filename)
             file.save(save_path)
-            return filename
+
+            # 저장 경로를 DB에 상대경로로 남기고 싶으면:
+            return f"{sub_dir}/{filename}"
         return None
 
     # 첨부파일 저장
-    business_license_filename = save_uploaded_file('business_license')
-    power_license_filename = save_uploaded_file('power_business_license')
-    grid_contract_filename = save_uploaded_file('grid_connection_contract')
+    business_license_filename = save_uploaded_file('business_license', 'business_license')
+    power_license_filename = save_uploaded_file('power_business_license', 'power_business_license')
+    grid_contract_filename = save_uploaded_file('grid_connection_contract', 'grid_connection_contract')
 
     # Property 인스턴스 생성 및 DB 저장
     new_property = Property(
@@ -98,10 +80,10 @@ def submit_sale():
         # 물건 정보
         plant_name=request.form.get('title'),
         location=request.form.get('location'),
-        sub_location=request.form.get('subLocation'),
+        sub_location=request.form.get('sub_location'),
         capacity=to_float(request.form.get('capacity')),
         current_status=request.form.get('construction-type'),
-        completion_date=request.form.get('completion_date'),
+        completion_date=datetime.strptime(request.form.get('completion_date'), "%Y-%m-%d").date() if request.form.get('completion_date') else None,
         land_contract=request.form.get('contract-type'),
 
         # 발전/매매 정보
@@ -155,7 +137,7 @@ def submit_sale():
     db.session.commit()
 
     flash("판매 신청이 완료되었습니다!")
-    return redirect(url_for('auth.mypage'))
+    return redirect(url_for('auth.mypage', tab='panel2'))
 
 @bp.route('/announcement/list/')
 def property_list() :
@@ -175,9 +157,33 @@ def property_list() :
         
     # 페이징 된 property 목록
     property_list = property_query.paginate(page=page, per_page=10)
-    return render_template('announcement/announcement_list.html', property_list=property_list, page=page, kw=kw)
+    
+    liked_property_ids = []
+    if g.user:
+        liked_property_ids = [pid for (pid,) in db.session.query(PropertyLike.property_id)
+                            .filter_by(user_id=g.user.id).all()]
+
+    return render_template('announcement/announcement_list.html', property_list=property_list, liked_property_ids=liked_property_ids, page=page, kw=kw)
 
 @bp.route('/detail/<int:property_id>/')
 def detail(property_id):
     property = Property.query.get_or_404(property_id)
     return render_template('announcement/announcement_detail.html', property=property)
+
+@bp.route('/like/<int:property_id>')
+@login_required
+def like(property_id):
+    exists = PropertyLike.query.filter_by(user_id=g.user.id, property_id=property_id).first()
+    if not exists:
+        db.session.add(PropertyLike(user_id=g.user.id, property_id=property_id))
+        db.session.commit()
+    return redirect(request.referrer)
+
+@bp.route('/unlike/<int:property_id>')
+@login_required
+def unlike(property_id):
+    like = PropertyLike.query.filter_by(user_id=g.user.id, property_id=property_id).first()
+    if like:
+        db.session.delete(like)
+        db.session.commit()
+    return redirect(request.referrer)
